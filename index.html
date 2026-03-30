@@ -3,136 +3,60 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>문항 배점기</title>
+<title>문항 배점 생성기</title>
 <style>
   :root{
-    --bg:#0b1020;
-    --panel:rgba(255,255,255,0.08);
-    --panel-strong:rgba(255,255,255,0.12);
-    --line:rgba(255,255,255,0.12);
-    --text:#eef2ff;
-    --muted:#a9b3d1;
-    --accent:#7c9cff;
-    --accent-2:#62e0c1;
-    --warn:#ffcb66;
-    --danger:#ff7b8d;
-    --success:#67e8a5;
-    --shadow:0 20px 60px rgba(0,0,0,.28);
-    --radius:22px;
+    --bg1:#f6f8fc;
+    --bg2:#eef3ff;
+    --card:#ffffff;
+    --line:#e6ebf5;
+    --text:#162033;
+    --muted:#6d7890;
+    --accent:#5b7cff;
+    --accent2:#7a5cff;
+    --success:#13b981;
+    --error:#ef4444;
+    --shadow:0 18px 45px rgba(29, 41, 77, 0.08);
+    --radius:24px;
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
   body{
     margin:0;
     font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background:
-      radial-gradient(1000px 600px at 10% 0%, rgba(124,156,255,.22), transparent 60%),
-      radial-gradient(900px 500px at 100% 10%, rgba(98,224,193,.18), transparent 50%),
-      linear-gradient(180deg, #0b1020 0%, #0f1530 100%);
     color:var(--text);
+    background:
+      radial-gradient(1200px 800px at 0% 0%, #ffffff 0%, rgba(255,255,255,.6) 45%, transparent 70%),
+      linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
   }
   .wrap{
-    max-width:1400px;
+    max-width:1280px;
     margin:0 auto;
-    padding:28px 20px 64px;
+    padding:28px 18px 56px;
   }
-  .hero{
-    display:grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap:20px;
-    margin-bottom:20px;
-  }
-  .card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    backdrop-filter: blur(14px);
-  }
-  .hero-main{
-    padding:28px;
-  }
-  .hero-side{
-    padding:24px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    gap:16px;
-  }
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border-radius:999px;
-    background:rgba(124,156,255,.16);
-    color:#d9e3ff;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.02em;
-  }
-  h1{
-    margin:14px 0 10px;
-    font-size:clamp(30px, 5vw, 46px);
-    line-height:1.06;
-  }
-  .sub{
-    color:var(--muted);
-    font-size:15px;
-    line-height:1.7;
-    max-width:760px;
-  }
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:18px;
-  }
-  .chip{
-    padding:10px 12px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    border:1px solid var(--line);
-    color:#d9def3;
-    font-size:13px;
-    font-weight:600;
-  }
-  .kpis{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
-  .kpi{
-    padding:16px;
-    border-radius:18px;
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--line);
-  }
-  .kpi .label{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:8px;
-  }
-  .kpi .value{
-    font-size:22px;
-    font-weight:800;
+  .title{
+    font-size:clamp(28px, 4vw, 42px);
+    font-weight:900;
+    letter-spacing:-0.03em;
+    margin:8px 0 20px;
   }
   .layout{
     display:grid;
-    grid-template-columns: 1.08fr .92fr;
+    grid-template-columns: 1.05fr .95fr;
     gap:20px;
   }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
   .panel{
-    padding:20px;
+    padding:22px;
   }
-  .panel h2{
-    margin:0 0 14px;
+  h2{
+    margin:0 0 16px;
     font-size:20px;
-  }
-  .panel .desc{
-    margin:-2px 0 16px;
-    color:var(--muted);
-    font-size:14px;
+    letter-spacing:-0.02em;
   }
   table{
     width:100%;
@@ -140,49 +64,37 @@
   }
   th,td{
     border:1px solid var(--line);
-    padding:10px 10px;
+    padding:11px 10px;
     text-align:center;
   }
   th{
-    background:rgba(255,255,255,.06);
-    color:#eef2ff;
-    font-weight:700;
+    background:#f8faff;
+    font-weight:800;
   }
   td.label{
     text-align:left;
-    font-weight:700;
+    font-weight:800;
+    background:#fbfcff;
     padding-left:12px;
-    background:rgba(255,255,255,.04);
   }
-  input[type="number"], input[type="text"]{
+  td.auto{
+    background:#f8fbff;
+    font-weight:700;
+    color:#334155;
+  }
+  input{
     width:100%;
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid #d9e1f0;
     border-radius:12px;
     padding:10px 12px;
-    outline:none;
     font-size:14px;
+    color:var(--text);
+    background:white;
+    outline:none;
   }
-  input[type="number"]:focus, input[type="text"]:focus{
-    border-color:rgba(124,156,255,.8);
-    box-shadow:0 0 0 4px rgba(124,156,255,.15);
-  }
-  .read-cell{
-    min-height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-  }
-  .row-total{
-    background:rgba(98,224,193,.08);
-  }
-  .section-break td{
-    background:transparent;
-    border:none;
-    height:10px;
-    padding:0;
+  input:focus{
+    border-color:#89a0ff;
+    box-shadow:0 0 0 4px rgba(91,124,255,.12);
   }
   .tools{
     display:flex;
@@ -194,36 +106,31 @@
     appearance:none;
     border:none;
     cursor:pointer;
+    padding:13px 17px;
     border-radius:14px;
-    padding:13px 16px;
     font-size:14px;
     font-weight:800;
-    transition:transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+    transition:.15s ease;
   }
   button:hover{ transform:translateY(-1px); }
-  button:active{ transform:translateY(0); }
   .btn-primary{
-    color:#0d1430;
-    background:linear-gradient(135deg, var(--accent-2), #b6ffe9);
-    box-shadow:0 12px 28px rgba(98,224,193,.25);
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    color:white;
+    box-shadow:0 14px 30px rgba(91,124,255,.22);
   }
   .btn-secondary{
-    color:var(--text);
-    background:rgba(255,255,255,.08);
+    background:#f5f7fc;
+    color:#334155;
     border:1px solid var(--line);
   }
-  .btn-accent{
+  .btn-download{
+    width:100%;
+    background:linear-gradient(135deg, #0ea5e9, #2563eb);
     color:white;
-    background:linear-gradient(135deg, #6888ff, #8b5cf6);
-    box-shadow:0 12px 28px rgba(124,156,255,.2);
-  }
-  .btn-ghost{
-    color:#d5defe;
-    background:transparent;
-    border:1px dashed rgba(255,255,255,.25);
+    box-shadow:0 14px 30px rgba(37,99,235,.18);
   }
   .message{
-    margin-top:14px;
+    margin-top:16px;
     border-radius:16px;
     padding:14px 16px;
     line-height:1.65;
@@ -233,31 +140,31 @@
   }
   .message.error{
     display:block;
-    background:rgba(255,123,141,.1);
-    border:1px solid rgba(255,123,141,.35);
-    color:#ffd7dd;
+    background:#fff4f4;
+    border:1px solid #ffcaca;
+    color:#9f1239;
   }
   .message.success{
     display:block;
-    background:rgba(103,232,165,.1);
-    border:1px solid rgba(103,232,165,.35);
-    color:#d5ffe8;
+    background:#f0fdf6;
+    border:1px solid #bbe9cf;
+    color:#166534;
   }
-  .results-grid{
+  .results{
     display:grid;
     grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:16px;
+    gap:14px;
   }
-  .result-card{
-    background:rgba(255,255,255,.04);
+  .box{
     border:1px solid var(--line);
     border-radius:18px;
     overflow:hidden;
+    background:#fcfdff;
   }
-  .result-card .head{
+  .box-head{
     padding:12px 14px;
-    font-weight:800;
-    background:rgba(255,255,255,.05);
+    font-weight:900;
+    background:#f8faff;
     border-bottom:1px solid var(--line);
   }
   .score-list{
@@ -266,27 +173,26 @@
     padding:12px;
     display:grid;
     gap:8px;
-    min-height:62px;
+    min-height:70px;
   }
   .score-item{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:10px;
+    align-items:center;
     padding:10px 12px;
     border-radius:12px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid #edf1f7;
+    background:white;
     font-variant-numeric: tabular-nums;
   }
   .score-item .idx{
-    color:var(--muted);
     font-size:12px;
-    font-weight:700;
+    color:var(--muted);
+    font-weight:800;
   }
   .score-item .val{
-    font-weight:900;
     font-size:15px;
+    font-weight:900;
   }
   .summary{
     display:grid;
@@ -294,282 +200,233 @@
     gap:12px;
     margin-top:16px;
   }
-  .summary .box{
+  .summary-card{
     padding:14px;
     border-radius:16px;
-    background:rgba(255,255,255,.05);
     border:1px solid var(--line);
+    background:#fbfcff;
   }
-  .summary .small{color:var(--muted); font-size:12px; margin-bottom:6px;}
-  .summary .big{font-size:22px; font-weight:900;}
-  .footnote{
-    margin-top:12px;
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.6;
-  }
-  .tiny{
-    color:var(--muted);
+  .summary-card .small{
     font-size:12px;
+    color:var(--muted);
+    margin-bottom:6px;
   }
-  .gridline{
-    height:1px;
-    background:var(--line);
-    margin:18px 0;
+  .summary-card .big{
+    font-size:23px;
+    font-weight:900;
   }
-  @media (max-width: 1120px){
-    .hero, .layout{ grid-template-columns:1fr; }
+  .download-wrap{
+    margin-top:20px;
+  }
+  .section-gap{ height:8px; }
+  @media (max-width: 1100px){
+    .layout{ grid-template-columns:1fr; }
   }
   @media (max-width: 760px){
-    .results-grid{ grid-template-columns:1fr; }
+    .results{ grid-template-columns:1fr; }
     .summary{ grid-template-columns:1fr; }
-    th,td{ padding:8px 6px; font-size:13px; }
-    .wrap{ padding:16px 12px 40px; }
-    .hero-main,.hero-side,.panel{ padding:16px; }
+    .panel{ padding:16px; }
+    th,td{ padding:9px 6px; font-size:13px; }
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <div class="card hero-main">
-        <div class="eyebrow">문항 배점기 · Web App</div>
-        <h1>고등학교 문항 배점표를<br>빠르게 설계하고 바로 내려받기</h1>
-        <div class="sub">
-          선택형은 소수점 첫째 자리까지, 서답형은 자연수로 생성합니다.
-          난이도 경계 조건, 비율 검증, 합계 검증, 생성 불가 사유와 해결 방법까지 한 번에 확인할 수 있습니다.
-        </div>
-        <div class="chips">
-          <span class="chip">선택형 내부 점수 차 ≤ 1.0</span>
-          <span class="chip">선택형 내림차순 정렬</span>
-          <span class="chip">서답형 내림차순 정렬</span>
-          <span class="chip">비율 자동 검증</span>
-          <span class="chip">XLSX 다운로드</span>
-        </div>
+<div class="wrap">
+  <div class="title">문항 배점 생성기</div>
+
+  <div class="layout">
+    <section class="card panel">
+      <h2>기초자료 입력</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:120px">구분</th>
+            <th>선택형</th>
+            <th>서답형</th>
+            <th>비율</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">문항개수</td>
+            <td><input id="mcCount" type="number" step="1" value="16"></td>
+            <td><input id="saCount" type="number" step="1" value="6"></td>
+            <td class="auto"></td>
+          </tr>
+          <tr>
+            <td class="label">상</td>
+            <td><input id="mcHCnt" type="number" step="1" value="3"></td>
+            <td><input id="saHCnt" type="number" step="1" value="2"></td>
+            <td class="auto" id="ratioCntH"></td>
+          </tr>
+          <tr>
+            <td class="label">중</td>
+            <td><input id="mcMCnt" type="number" step="1" value="7"></td>
+            <td><input id="saMCnt" type="number" step="1" value="4"></td>
+            <td class="auto" id="ratioCntM"></td>
+          </tr>
+          <tr>
+            <td class="label">하</td>
+            <td><input id="mcLCnt" type="number" step="1" value="6"></td>
+            <td><input id="saLCnt" type="number" step="1" value="0"></td>
+            <td class="auto" id="ratioCntL"></td>
+          </tr>
+          <tr>
+            <td class="label">합계</td>
+            <td class="auto" id="mcCntSum"></td>
+            <td class="auto" id="saCntSum"></td>
+            <td class="auto" id="ratioCntSum"></td>
+          </tr>
+
+          <tr class="section-gap"><td colspan="4" style="border:none;background:transparent"></td></tr>
+
+          <tr>
+            <td class="label">문항점수</td>
+            <td><input id="mcScore" type="number" step="1" value="50"></td>
+            <td><input id="saScore" type="number" step="1" value="50"></td>
+            <td class="auto"></td>
+          </tr>
+          <tr>
+            <td class="label">상</td>
+            <td><input id="mcHScore" type="number" step="1" value="15"></td>
+            <td><input id="saHScore" type="number" step="1" value="20"></td>
+            <td class="auto" id="ratioScoreH"></td>
+          </tr>
+          <tr>
+            <td class="label">중</td>
+            <td><input id="mcMScore" type="number" step="1" value="23"></td>
+            <td><input id="saMScore" type="number" step="1" value="30"></td>
+            <td class="auto" id="ratioScoreM"></td>
+          </tr>
+          <tr>
+            <td class="label">하</td>
+            <td><input id="mcLScore" type="number" step="1" value="12"></td>
+            <td><input id="saLScore" type="number" step="1" value="0"></td>
+            <td class="auto" id="ratioScoreL"></td>
+          </tr>
+          <tr>
+            <td class="label">합계</td>
+            <td class="auto" id="mcScoreSum"></td>
+            <td class="auto" id="saScoreSum"></td>
+            <td class="auto" id="ratioScoreSum"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tools">
+        <button class="btn-primary" id="generateBtn">배점 생성</button>
+        <button class="btn-secondary" id="resetBtn">기본값 복원</button>
       </div>
-      <div class="card hero-side">
-        <div class="kpis">
-          <div class="kpi">
-            <div class="label">출력 열 구조</div>
-            <div class="value">J~P 기준</div>
-          </div>
-          <div class="kpi">
-            <div class="label">선택형 단위</div>
-            <div class="value">0.1점</div>
-          </div>
-          <div class="kpi">
-            <div class="label">서답형 단위</div>
-            <div class="value">자연수</div>
-          </div>
-          <div class="kpi">
-            <div class="label">생성 방식</div>
-            <div class="value">조건 탐색</div>
-          </div>
-        </div>
-        <div class="tiny">
-          아래 표에 수치를 입력한 뒤 <strong>배점 생성</strong>을 누르세요. 생성 결과는 화면에 즉시 표시되고, 바로 <strong>.xlsx</strong> 파일로 내려받을 수 있습니다.
-        </div>
-      </div>
+
+      <div id="message" class="message"></div>
     </section>
 
-    <section class="layout">
-      <div class="card panel">
-        <h2>기초자료 입력</h2>
-        <div class="desc">A:E 구조를 웹 양식으로 옮긴 형태입니다. 노란 칸처럼 직접 값을 입력하세요.</div>
+    <section class="card panel">
+      <h2>문항 배점표</h2>
 
-        <table>
-          <thead>
-            <tr>
-              <th style="width:110px">구분</th>
-              <th>선택형</th>
-              <th>서답형</th>
-              <th>합계</th>
-              <th>비율</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="label">문항개수</td>
-              <td><input id="B2" type="number" step="1" value="14"></td>
-              <td><input id="C2" type="number" step="1" value="6"></td>
-              <td><div class="read-cell" id="D2">20</div></td>
-              <td><div class="read-cell"></div></td>
-            </tr>
-            <tr>
-              <td class="label">상</td>
-              <td><input id="B3" type="number" step="1" value="1"></td>
-              <td><input id="C3" type="number" step="1" value="2"></td>
-              <td><div class="read-cell" id="D3">3</div></td>
-              <td><input id="E3" type="text" value="15%"></td>
-            </tr>
-            <tr>
-              <td class="label">중</td>
-              <td><input id="B4" type="number" step="1" value="6"></td>
-              <td><input id="C4" type="number" step="1" value="2"></td>
-              <td><div class="read-cell" id="D4">8</div></td>
-              <td><input id="E4" type="text" value="40%"></td>
-            </tr>
-            <tr>
-              <td class="label">하</td>
-              <td><input id="B5" type="number" step="1" value="7"></td>
-              <td><input id="C5" type="number" step="1" value="2"></td>
-              <td><div class="read-cell" id="D5">9</div></td>
-              <td><input id="E5" type="text" value="45%"></td>
-            </tr>
-            <tr class="row-total">
-              <td class="label">합계</td>
-              <td><div class="read-cell" id="B6">14</div></td>
-              <td><div class="read-cell" id="C6">6</div></td>
-              <td><div class="read-cell" id="D6">20</div></td>
-              <td><input id="E6" type="text" value="100%"></td>
-            </tr>
-
-            <tr class="section-break"><td colspan="5"></td></tr>
-
-            <tr>
-              <td class="label">문항점수</td>
-              <td><input id="B7" type="number" step="1" value="50"></td>
-              <td><input id="C7" type="number" step="1" value="50"></td>
-              <td><div class="read-cell" id="D7">100</div></td>
-              <td><div class="read-cell"></div></td>
-            </tr>
-            <tr>
-              <td class="label">상</td>
-              <td><input id="B8" type="number" step="1" value="8"></td>
-              <td><input id="C8" type="number" step="1" value="12"></td>
-              <td><div class="read-cell" id="D8">20</div></td>
-              <td><input id="E8" type="text" value="20%"></td>
-            </tr>
-            <tr>
-              <td class="label">중</td>
-              <td><input id="B9" type="number" step="1" value="30"></td>
-              <td><input id="C9" type="number" step="1" value="20"></td>
-              <td><div class="read-cell" id="D9">50</div></td>
-              <td><input id="E9" type="text" value="50%"></td>
-            </tr>
-            <tr>
-              <td class="label">하</td>
-              <td><input id="B10" type="number" step="1" value="12"></td>
-              <td><input id="C10" type="number" step="1" value="18"></td>
-              <td><div class="read-cell" id="D10">30</div></td>
-              <td><input id="E10" type="text" value="30%"></td>
-            </tr>
-            <tr class="row-total">
-              <td class="label">합계</td>
-              <td><div class="read-cell" id="B11">50</div></td>
-              <td><div class="read-cell" id="C11">50</div></td>
-              <td><div class="read-cell" id="D11">100</div></td>
-              <td><input id="E11" type="text" value="100%"></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="tools">
-          <button class="btn-primary" id="generateBtn">배점 생성</button>
-          <button class="btn-secondary" id="recalcBtn">합계 다시 계산</button>
-          <button class="btn-ghost" id="resetBtn">기본값 복원</button>
+      <div class="results">
+        <div class="box">
+          <div class="box-head">선택형 상</div>
+          <ul class="score-list" id="mcHighList"></ul>
         </div>
-
-        <div id="message" class="message"></div>
+        <div class="box">
+          <div class="box-head">서답형 상</div>
+          <ul class="score-list" id="saHighList"></ul>
+        </div>
+        <div class="box">
+          <div class="box-head">선택형 중</div>
+          <ul class="score-list" id="mcMidList"></ul>
+        </div>
+        <div class="box">
+          <div class="box-head">서답형 중</div>
+          <ul class="score-list" id="saMidList"></ul>
+        </div>
+        <div class="box">
+          <div class="box-head">선택형 하</div>
+          <ul class="score-list" id="mcLowList"></ul>
+        </div>
+        <div class="box">
+          <div class="box-head">서답형 하</div>
+          <ul class="score-list" id="saLowList"></ul>
+        </div>
       </div>
 
-      <div class="card panel">
-        <h2>문항 점수표</h2>
-        <div class="desc">출력은 J~P 구조를 화면에 맞게 재배치했습니다. 각 열은 내림차순 정렬됩니다.</div>
-
-        <div class="results-grid">
-          <div class="result-card">
-            <div class="head">선택형 상 · J열</div>
-            <ul class="score-list" id="mcHighList"></ul>
-          </div>
-          <div class="result-card">
-            <div class="head">서답형 상 · N열</div>
-            <ul class="score-list" id="saHighList"></ul>
-          </div>
-          <div class="result-card">
-            <div class="head">선택형 중 · K열</div>
-            <ul class="score-list" id="mcMidList"></ul>
-          </div>
-          <div class="result-card">
-            <div class="head">서답형 중 · O열</div>
-            <ul class="score-list" id="saMidList"></ul>
-          </div>
-          <div class="result-card">
-            <div class="head">선택형 하 · L열</div>
-            <ul class="score-list" id="mcLowList"></ul>
-          </div>
-          <div class="result-card">
-            <div class="head">서답형 하 · P열</div>
-            <ul class="score-list" id="saLowList"></ul>
-          </div>
+      <div class="summary">
+        <div class="summary-card">
+          <div class="small">선택형 총점</div>
+          <div class="big" id="sumMC">0</div>
         </div>
-
-        <div class="summary">
-          <div class="box">
-            <div class="small">선택형 총점</div>
-            <div class="big" id="sumMC">0</div>
-          </div>
-          <div class="box">
-            <div class="small">서답형 총점</div>
-            <div class="big" id="sumSA">0</div>
-          </div>
-          <div class="box">
-            <div class="small">전체 총점</div>
-            <div class="big" id="sumAll">0</div>
-          </div>
+        <div class="summary-card">
+          <div class="small">서답형 총점</div>
+          <div class="big" id="sumSA">0</div>
         </div>
-
-        <div class="gridline"></div>
-
-        <div class="tools">
-          <button class="btn-accent" id="downloadBtn">XLSX 파일로 내려받기</button>
+        <div class="summary-card">
+          <div class="small">전체 총점</div>
+          <div class="big" id="sumAll">0</div>
         </div>
-        <div class="footnote">
-          내려받은 파일에는 <strong>입력 시트</strong>와 <strong>출력 시트</strong>가 함께 들어갑니다.
-          출력 시트는 웹 앱의 생성 결과를 J~P 위치 기준으로 배치합니다.
-        </div>
+      </div>
+
+      <div class="download-wrap">
+        <h2 style="margin-bottom:12px;">내려받기</h2>
+        <button class="btn-download" id="downloadBtn">XLSX 파일로 내려받기</button>
       </div>
     </section>
   </div>
+</div>
 
 <script>
 (() => {
-  const $ = (id) => document.getElementById(id);
-  const inputIds = ["B2","C2","B3","C3","B4","C4","B5","C5","B7","C7","B8","C8","B9","C9","B10","C10","E3","E4","E5","E6","E8","E9","E10","E11"];
+  const $ = id => document.getElementById(id);
+
+  const numericIds = [
+    "mcCount","saCount","mcHCnt","saHCnt","mcMCnt","saMCnt","mcLCnt","saLCnt",
+    "mcScore","saScore","mcHScore","saHScore","mcMScore","saMScore","mcLScore","saLScore"
+  ];
+
   const defaults = {};
-  inputIds.forEach(id => defaults[id] = $(id).value);
+  numericIds.forEach(id => defaults[id] = $(id).value);
 
   let lastResult = null;
 
-  function intVal(id){
+  function n(id){
     const v = parseInt($(id).value, 10);
     return Number.isFinite(v) ? v : 0;
   }
 
-  function parsePercent(v){
-    if (typeof v === "number") return v > 1 ? v/100 : v;
-    let s = String(v ?? "").trim().replace(/\s/g, "");
-    if (!s) return 0;
-    if (s.endsWith("%")) {
-      const n = parseFloat(s.slice(0,-1));
-      return Number.isFinite(n) ? n/100 : 0;
+  function fmtPercent(value){
+    return `${Math.round(value * 100)}%`;
+  }
+
+  function fmtOne(value){
+    return (Math.round(value * 10) / 10).toFixed(1);
+  }
+
+  function sum(arr){
+    return (arr || []).reduce((a,b) => a + b, 0);
+  }
+
+  function minVal(arr){ return Math.min(...arr); }
+  function maxVal(arr){ return Math.max(...arr); }
+  function arrayHasData(arr){ return Array.isArray(arr) && arr.length > 0; }
+  function allSame(arr){ return arr.every(v => v === arr[0]); }
+  function randInt(a,b){ return Math.floor(Math.random() * (b-a+1)) + a; }
+
+  function sortDesc(arr){
+    return arr.slice().sort((a,b)=>b-a);
+  }
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1; i>0; i--){
+      const j = randInt(0,i);
+      [a[i], a[j]] = [a[j], a[i]];
     }
-    const n = parseFloat(s);
-    if (!Number.isFinite(n)) return 0;
-    return n > 1 ? n/100 : n;
-  }
-
-  function fmtPercent01(v){
-    return `${Math.round(v*100)}%`;
-  }
-
-  function fmtOneDecimal(v){
-    return (Math.round(v * 10) / 10).toFixed(1);
+    return a;
   }
 
   function showMessage(text, type){
     const box = $("message");
-    box.className = "message " + type;
+    box.className = `message ${type}`;
     box.textContent = text;
   }
 
@@ -579,111 +436,59 @@
     box.textContent = "";
   }
 
-  function recalcTotals(){
-    const B2 = intVal("B2"), C2 = intVal("C2");
-    const B3 = intVal("B3"), C3 = intVal("C3");
-    const B4 = intVal("B4"), C4 = intVal("C4");
-    const B5 = intVal("B5"), C5 = intVal("C5");
-
-    const B7 = intVal("B7"), C7 = intVal("C7");
-    const B8 = intVal("B8"), C8 = intVal("C8");
-    const B9 = intVal("B9"), C9 = intVal("C9");
-    const B10 = intVal("B10"), C10 = intVal("C10");
-
-    $("D2").textContent = B2 + C2;
-    $("D3").textContent = B3 + C3;
-    $("D4").textContent = B4 + C4;
-    $("D5").textContent = B5 + C5;
-    $("B6").textContent = B3 + B4 + B5;
-    $("C6").textContent = C3 + C4 + C5;
-    $("D6").textContent = (B3 + B4 + B5) + (C3 + C4 + C5);
-
-    $("D7").textContent = B7 + C7;
-    $("D8").textContent = B8 + C8;
-    $("D9").textContent = B9 + C9;
-    $("D10").textContent = B10 + C10;
-    $("B11").textContent = B8 + B9 + B10;
-    $("C11").textContent = C8 + C9 + C10;
-    $("D11").textContent = (B8 + B9 + B10) + (C8 + C9 + C10);
+  function safeAvg(total, cnt){
+    return cnt > 0 ? total / cnt : 0;
   }
 
-  function arrayHasData(arr){ return Array.isArray(arr) && arr.length > 0; }
-  function sum(arr){ return (arr || []).reduce((a,b)=>a+b,0); }
-  function minVal(arr){ return Math.min(...arr); }
-  function maxVal(arr){ return Math.max(...arr); }
-  function allSame(arr){ return arr.every(v => v === arr[0]); }
-  function randInt(a,b){ return Math.floor(Math.random() * (b-a+1)) + a; }
-  function shuffle(arr){
-    const a = arr.slice();
-    for(let i=a.length-1;i>0;i--){
-      const j = randInt(0,i);
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-  function sortDesc(arr){ return arr.slice().sort((a,b)=>b-a); }
-  function safeAvg(total, cnt){ return cnt > 0 ? total / cnt : 0; }
+  function updateAutoFields(){
+    const mcCount = n("mcCount"), saCount = n("saCount");
+    const mcHCnt = n("mcHCnt"), saHCnt = n("saHCnt");
+    const mcMCnt = n("mcMCnt"), saMCnt = n("saMCnt");
+    const mcLCnt = n("mcLCnt"), saLCnt = n("saLCnt");
 
-  function validatePercentSection(msgs){
-    const totCnt = Number($("D6").textContent) || 0;
-    const totScore = Number($("D11").textContent) || 0;
+    const mcScore = n("mcScore"), saScore = n("saScore");
+    const mcHScore = n("mcHScore"), saHScore = n("saHScore");
+    const mcMScore = n("mcMScore"), saMScore = n("saMScore");
+    const mcLScore = n("mcLScore"), saLScore = n("saLScore");
 
-    const pCntH = parsePercent($("E3").value);
-    const pCntM = parsePercent($("E4").value);
-    const pCntL = parsePercent($("E5").value);
-    const pCntSum = parsePercent($("E6").value);
+    const totalCnt = mcCount + saCount;
+    const totalScore = mcScore + saScore;
 
-    const pScoreH = parsePercent($("E8").value);
-    const pScoreM = parsePercent($("E9").value);
-    const pScoreL = parsePercent($("E10").value);
-    const pScoreSum = parsePercent($("E11").value);
+    $("mcCntSum").textContent = mcHCnt + mcMCnt + mcLCnt;
+    $("saCntSum").textContent = saHCnt + saMCnt + saLCnt;
+    $("mcScoreSum").textContent = mcHScore + mcMScore + mcLScore;
+    $("saScoreSum").textContent = saHScore + saMScore + saLScore;
 
-    if (Math.abs((pCntH+pCntM+pCntL)-1) > 0.0001) msgs.push("- 문항개수 비율(E3:E5)의 합이 100%가 아닙니다.");
-    if (Math.abs(pCntSum-1) > 0.0001) msgs.push("- 문항개수 비율 합계(E6)가 100%가 아닙니다.");
-    if (Math.abs((pScoreH+pScoreM+pScoreL)-1) > 0.0001) msgs.push("- 문항점수 비율(E8:E10)의 합이 100%가 아닙니다.");
-    if (Math.abs(pScoreSum-1) > 0.0001) msgs.push("- 문항점수 비율 합계(E11)가 100%가 아닙니다.");
+    $("ratioCntH").textContent = totalCnt > 0 ? fmtPercent((mcHCnt + saHCnt) / totalCnt) : "";
+    $("ratioCntM").textContent = totalCnt > 0 ? fmtPercent((mcMCnt + saMCnt) / totalCnt) : "";
+    $("ratioCntL").textContent = totalCnt > 0 ? fmtPercent((mcLCnt + saLCnt) / totalCnt) : "";
+    $("ratioCntSum").textContent = totalCnt > 0 ? "100%" : "";
 
-    if (totCnt > 0){
-      if (Math.abs(pCntH - Number($("D3").textContent)/totCnt) > 0.001) msgs.push("- 상 문항개수 비율(E3)이 실제 비율과 다릅니다.");
-      if (Math.abs(pCntM - Number($("D4").textContent)/totCnt) > 0.001) msgs.push("- 중 문항개수 비율(E4)이 실제 비율과 다릅니다.");
-      if (Math.abs(pCntL - Number($("D5").textContent)/totCnt) > 0.001) msgs.push("- 하 문항개수 비율(E5)이 실제 비율과 다릅니다.");
-    }
-    if (totScore > 0){
-      if (Math.abs(pScoreH - Number($("D8").textContent)/totScore) > 0.001) msgs.push("- 상 문항점수 비율(E8)이 실제 비율과 다릅니다.");
-      if (Math.abs(pScoreM - Number($("D9").textContent)/totScore) > 0.001) msgs.push("- 중 문항점수 비율(E9)이 실제 비율과 다릅니다.");
-      if (Math.abs(pScoreL - Number($("D10").textContent)/totScore) > 0.001) msgs.push("- 하 문항점수 비율(E10)이 실제 비율과 다릅니다.");
-    }
+    $("ratioScoreH").textContent = totalScore > 0 ? fmtPercent((mcHScore + saHScore) / totalScore) : "";
+    $("ratioScoreM").textContent = totalScore > 0 ? fmtPercent((mcMScore + saMScore) / totalScore) : "";
+    $("ratioScoreL").textContent = totalScore > 0 ? fmtPercent((mcLScore + saLScore) / totalScore) : "";
+    $("ratioScoreSum").textContent = totalScore > 0 ? "100%" : "";
   }
 
   function validateInput(){
-    recalcTotals();
+    updateAutoFields();
     const msgs = [];
 
-    const mcCnt = intVal("B2"), saCnt = intVal("C2"), totCnt = Number($("D2").textContent);
-    const mcHCnt = intVal("B3"), mcMCnt = intVal("B4"), mcLCnt = intVal("B5");
-    const saHCnt = intVal("C3"), saMCnt = intVal("C4"), saLCnt = intVal("C5");
+    const mcCount = n("mcCount"), saCount = n("saCount");
+    const mcHCnt = n("mcHCnt"), saHCnt = n("saHCnt");
+    const mcMCnt = n("mcMCnt"), saMCnt = n("saMCnt");
+    const mcLCnt = n("mcLCnt"), saLCnt = n("saLCnt");
 
-    const mcScore = intVal("B7"), saScore = intVal("C7"), totScore = Number($("D7").textContent);
-    const mcHScore = intVal("B8"), mcMScore = intVal("B9"), mcLScore = intVal("B10");
-    const saHScore = intVal("C8"), saMScore = intVal("C9"), saLScore = intVal("C10");
+    const mcScore = n("mcScore"), saScore = n("saScore");
+    const mcHScore = n("mcHScore"), saHScore = n("saHScore");
+    const mcMScore = n("mcMScore"), saMScore = n("saMScore");
+    const mcLScore = n("mcLScore"), saLScore = n("saLScore");
 
-    if (mcCnt + saCnt !== totCnt) msgs.push(`- 문항개수 합계 불일치: 선택형+서답형=${mcCnt+saCnt}, 합계=${totCnt}`);
-    if (mcHCnt + mcMCnt + mcLCnt !== mcCnt) msgs.push("- 선택형 상/중/하 문항개수의 합이 선택형 문항개수와 다릅니다.");
-    if (saHCnt + saMCnt + saLCnt !== saCnt) msgs.push("- 서답형 상/중/하 문항개수의 합이 서답형 문항개수와 다릅니다.");
+    if (mcHCnt + mcMCnt + mcLCnt !== mcCount) msgs.push("- 선택형 상/중/하 문항개수의 합이 선택형 문항개수와 다릅니다.");
+    if (saHCnt + saMCnt + saLCnt !== saCount) msgs.push("- 서답형 상/중/하 문항개수의 합이 서답형 문항개수와 다릅니다.");
 
-    if (Number($("D3").textContent) !== mcHCnt + saHCnt) msgs.push("- 상 문항개수 합계(D3)가 맞지 않습니다.");
-    if (Number($("D4").textContent) !== mcMCnt + saMCnt) msgs.push("- 중 문항개수 합계(D4)가 맞지 않습니다.");
-    if (Number($("D5").textContent) !== mcLCnt + saLCnt) msgs.push("- 하 문항개수 합계(D5)가 맞지 않습니다.");
-    if (Number($("D6").textContent) !== totCnt) msgs.push("- 문항개수 총합(D6)이 전체 문항개수와 다릅니다.");
-
-    if (mcScore + saScore !== totScore) msgs.push(`- 문항점수 합계 불일치: 선택형+서답형=${mcScore+saScore}, 합계=${totScore}`);
     if (mcHScore + mcMScore + mcLScore !== mcScore) msgs.push("- 선택형 상/중/하 점수의 합이 선택형 문항점수와 다릅니다.");
     if (saHScore + saMScore + saLScore !== saScore) msgs.push("- 서답형 상/중/하 점수의 합이 서답형 문항점수와 다릅니다.");
-
-    if (Number($("D8").textContent) !== mcHScore + saHScore) msgs.push("- 상 점수 합계(D8)가 맞지 않습니다.");
-    if (Number($("D9").textContent) !== mcMScore + saMScore) msgs.push("- 중 점수 합계(D9)가 맞지 않습니다.");
-    if (Number($("D10").textContent) !== mcLScore + saLScore) msgs.push("- 하 점수 합계(D10)가 맞지 않습니다.");
-    if (Number($("D11").textContent) !== totScore) msgs.push("- 전체 점수 합계(D11)가 총점과 다릅니다.");
 
     if (mcHCnt > 0 && mcHScore * 10 < mcHCnt) msgs.push("- 선택형 상: 최소 0.1점씩도 줄 수 없습니다.");
     if (mcMCnt > 0 && mcMScore * 10 < mcMCnt) msgs.push("- 선택형 중: 최소 0.1점씩도 줄 수 없습니다.");
@@ -693,7 +498,6 @@
     if (saMCnt > 0 && saMScore < saMCnt) msgs.push("- 서답형 중: 최소 1점씩도 줄 수 없습니다.");
     if (saLCnt > 0 && saLScore < saLCnt) msgs.push("- 서답형 하: 최소 1점씩도 줄 수 없습니다.");
 
-    validatePercentSection(msgs);
     return msgs;
   }
 
@@ -702,24 +506,28 @@
     if (arrayHasData(arrM) && arrayHasData(arrL) && maxVal(arrL) > minVal(arrM)) return false;
     return true;
   }
+
   function checkSABoundary(arrH, arrM, arrL){
     if (arrayHasData(arrH) && arrayHasData(arrM) && minVal(arrH) <= maxVal(arrM)) return false;
     if (arrayHasData(arrM) && arrayHasData(arrL) && minVal(arrM) <= maxVal(arrL)) return false;
     return true;
   }
+
   function checkMCInternalSpread(arr){
     if (!arrayHasData(arr)) return true;
-    return (maxVal(arr) - minVal(arr) <= 10); // 1.0점
+    return (maxVal(arr) - minVal(arr) <= 10);
   }
 
   function buildRandomPartition(n, total, lowBound, highBound){
     if (n === 0) return total === 0 ? [] : null;
-    if (total < n*lowBound || total > n*highBound) return null;
+    if (total < n * lowBound || total > n * highBound) return null;
+
     const arr = [];
     let remain = total;
-    for(let i=1;i<=n;i++){
-      const vMin = Math.max(lowBound, remain - (n-i)*highBound);
-      const vMax = Math.min(highBound, remain - (n-i)*lowBound);
+
+    for(let i=1; i<=n; i++){
+      const vMin = Math.max(lowBound, remain - (n-i) * highBound);
+      const vMax = Math.min(highBound, remain - (n-i) * lowBound);
       if (vMin > vMax) return null;
       const v = randInt(vMin, vMax);
       arr.push(v);
@@ -734,15 +542,18 @@
 
     const arr = new Array(n).fill(Math.floor(total / n));
     let remain = total % n;
-    for(let i=0;i<remain;i++) arr[i] += 1;
+    for(let i=0; i<remain; i++) arr[i] += 1;
 
     if (preferVariation && n >= 2){
-      for(let t=0;t<100;t++){
-        const i = randInt(0,n-1), j = randInt(0,n-1);
+      for(let t=0; t<100; t++){
+        const i = randInt(0, n-1);
+        const j = randInt(0, n-1);
         if (i !== j && arr[i] >= 2){
-          arr[i] -= 1; arr[j] += 1;
-          if (maxVal(arr)-minVal(arr) > 10){
-            arr[i] += 1; arr[j] -= 1;
+          arr[i] -= 1;
+          arr[j] += 1;
+          if (maxVal(arr) - minVal(arr) > 10){
+            arr[i] += 1;
+            arr[j] -= 1;
           }
         }
       }
@@ -752,66 +563,38 @@
     if (!checkMCInternalSpread(mixed)) return null;
 
     if (preferVariation && allSame(mixed) && n >= 2){
-      for(let i=0;i<n;i++){
-        for(let j=0;j<n;j++){
+      for(let i=0; i<n; i++){
+        for(let j=0; j<n; j++){
           if (i !== j && mixed[i] >= 2){
-            mixed[i] -= 1; mixed[j] += 1;
+            mixed[i] -= 1;
+            mixed[j] += 1;
             if (checkMCInternalSpread(mixed) && !allSame(mixed)) return mixed;
-            mixed[i] += 1; mixed[j] -= 1;
+            mixed[i] += 1;
+            mixed[j] -= 1;
           }
         }
       }
     }
+
     return mixed;
   }
 
-  function buildMCFailureReason(nH,nM,nL,sH,sM,sL,avgH,avgM,avgL){
-    const out = ["선택형에서 난이도 경계 조건을 만족하기 어려운 점수 구조입니다."];
-    if (nH > 0 && nM > 0 && avgM > avgH) out.push(`- 중 평균점수(${avgM.toFixed(1)})가 상 평균점수(${avgH.toFixed(1)})보다 높습니다.`);
-    if (nM > 0 && nL > 0 && avgL > avgM) out.push(`- 하 평균점수(${avgL.toFixed(1)})가 중 평균점수(${avgM.toFixed(1)})보다 높습니다.`);
-    out.push("- 필요한 조건: max(하) ≤ min(중), max(중) ≤ min(상)");
-    return out.join("\n");
-  }
+  function generateMultipleChoice(){
+    const nH = n("mcHCnt"), nM = n("mcMCnt"), nL = n("mcLCnt");
+    const sH = n("mcHScore") * 10, sM = n("mcMScore") * 10, sL = n("mcLScore") * 10;
 
-  function buildMCFailureSolution(){
-    return [
-      "1) 선택형 상 점수를 늘리세요.",
-      "2) 선택형 중 점수를 줄이세요.",
-      "3) 선택형 하 점수를 더 낮추세요.",
-      "4) 상/중/하 문항 수 비율을 다시 조정하세요.",
-      "5) 같은 난이도 내에서 점수 차이를 내야 하므로 0.1 단위 여유가 있는지도 함께 확인하세요."
-    ].join("\n");
-  }
-
-  function buildSAFailureReason(nH,nM,nL,sH,sM,sL,avgH,avgM,avgL){
-    const out = ["서답형에서 난이도 간 점수 구간을 엄격히 분리할 수 없는 구조입니다."];
-    if (nH > 0 && nM > 0 && avgH <= avgM) out.push(`- 상 평균점수(${avgH.toFixed(1)})가 중 평균점수(${avgM.toFixed(1)})보다 크지 않습니다.`);
-    if (nM > 0 && nL > 0 && avgM <= avgL) out.push(`- 중 평균점수(${avgM.toFixed(1)})가 하 평균점수(${avgL.toFixed(1)})보다 크지 않습니다.`);
-    out.push("- 필요한 조건: min(상) > max(중), min(중) > max(하)");
-    return out.join("\n");
-  }
-
-  function buildSAFailureSolution(){
-    return [
-      "1) 서답형 상 점수를 늘리세요.",
-      "2) 서답형 중 점수를 낮추세요.",
-      "3) 서답형 하 점수를 더 낮추세요.",
-      "4) 각 난이도 문항 수를 조정하세요."
-    ].join("\n");
-  }
-
-  function generateMultipleChoiceV22(nH,nM,nL,sH,sM,sL){
-    const avgH = safeAvg(sH,nH)/10;
-    const avgM = safeAvg(sM,nM)/10;
-    const avgL = safeAvg(sL,nL)/10;
+    const avgH = safeAvg(sH, nH) / 10;
+    const avgM = safeAvg(sM, nM) / 10;
+    const avgL = safeAvg(sL, nL) / 10;
 
     for(let tries=0; tries<8000; tries++){
       const arrL = buildRandomPartitionMC(nL, sL, true);
       const arrM = buildRandomPartitionMC(nM, sM, true);
       const arrH = buildRandomPartitionMC(nH, sH, true);
+
       if (arrL === null || arrM === null || arrH === null) continue;
       if (!checkMCInternalSpread(arrL) || !checkMCInternalSpread(arrM) || !checkMCInternalSpread(arrH)) continue;
-      if (checkMCBoundary(arrH, arrM, arrL)) {
+      if (checkMCBoundary(arrH, arrM, arrL)){
         return { ok:true, arrH:sortDesc(arrH), arrM:sortDesc(arrM), arrL:sortDesc(arrL) };
       }
     }
@@ -819,24 +602,32 @@
     return {
       ok:false,
       reason:
-`선택형 배점을 생성하지 못했습니다.
-- 같은 난이도 안에서 최고점과 최저점의 차이를 1.0점 이내로 유지해야 하고
-- 동시에 상/중/하 경계 조건(max(하) ≤ min(중), max(중) ≤ min(상))도 만족해야 합니다.
+`선택형 배점 생성에 실패했습니다.
+- 같은 난이도 안에서 최고점과 최저점의 차이를 1.0점 이내로 유지해야 합니다.
+- 동시에 상/중/하 경계 조건도 만족해야 합니다.
 - 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
-      solution: buildMCFailureSolution()
+      solution:
+`1) 선택형 상 점수를 늘리세요.
+2) 선택형 중 또는 하 점수를 낮추세요.
+3) 같은 난이도 내 문항 수를 줄이면 분배가 쉬워집니다.
+4) 소수점 차이를 만들 수 있도록 0.1 단위 여유가 있는지 확인하세요.`
     };
   }
 
-  function generateShortAnswerV2(nH,nM,nL,sH,sM,sL){
-    const avgH = safeAvg(sH,nH);
-    const avgM = safeAvg(sM,nM);
-    const avgL = safeAvg(sL,nL);
+  function generateShortAnswer(){
+    const nH = n("saHCnt"), nM = n("saMCnt"), nL = n("saLCnt");
+    const sH = n("saHScore"), sM = n("saMScore"), sL = n("saLScore");
+
+    const avgH = safeAvg(sH, nH);
+    const avgM = safeAvg(sM, nM);
+    const avgL = safeAvg(sL, nL);
+
     let feasible = false, a = 1, b = 2;
 
     outer:
-    for(a=1;a<=1000;a++){
+    for(a=1; a<=1000; a++){
       if (nL > 0 && (sL < nL || sL > nL * a)) continue;
-      for(b=a+1;b<=1000;b++){
+      for(b=a+1; b<=1000; b++){
         if (nM > 0 && (sM < nM*(a+1) || sM > nM*b)) continue;
         if (nH > 0 && sH < nH*(b+1)) continue;
         feasible = true;
@@ -847,17 +638,25 @@
     if (!feasible){
       return {
         ok:false,
-        reason: buildSAFailureReason(nH,nM,nL,sH,sM,sL,avgH,avgM,avgL),
-        solution: buildSAFailureSolution()
+        reason:
+`서답형 배점 생성에 실패했습니다.
+- 난이도 간 점수 구간을 엄격히 분리할 수 없는 구조입니다.
+- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
+        solution:
+`1) 서답형 상 점수를 늘리세요.
+2) 서답형 중 점수를 낮추세요.
+3) 서답형 하 점수를 더 낮추세요.
+4) 각 난이도 문항 수를 조정하세요.`
       };
     }
 
     for(let tries=0; tries<5000; tries++){
       const arrL = buildRandomPartition(nL, sL, 1, a);
       const arrM = buildRandomPartition(nM, sM, a+1, b);
-      const arrH = buildRandomPartition(nH, sH, b+1, sH || (b+1));
+      const arrH = buildRandomPartition(nH, sH, b+1, Math.max(sH, b+1));
+
       if (arrL === null || arrM === null || arrH === null) continue;
-      if (checkSABoundary(arrH,arrM,arrL)){
+      if (checkSABoundary(arrH, arrM, arrL)){
         return { ok:true, arrH:sortDesc(arrH), arrM:sortDesc(arrM), arrL:sortDesc(arrL) };
       }
     }
@@ -865,10 +664,14 @@
     return {
       ok:false,
       reason:
-`서답형 점수를 자연수로 여러 번 탐색했지만,
-min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지 못했습니다.
-현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
-      solution: buildSAFailureSolution()
+`서답형 배점 생성에 실패했습니다.
+- 난이도 경계 조건을 만족하는 자연수 조합을 찾지 못했습니다.
+- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
+      solution:
+`1) 서답형 상 점수를 늘리세요.
+2) 서답형 중 점수를 낮추세요.
+3) 서답형 하 점수를 더 낮추세요.
+4) 각 난이도 문항 수를 조정하세요.`
     };
   }
 
@@ -879,10 +682,10 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
       ul.innerHTML = `<li class="score-item"><span class="idx">-</span><span class="val">없음</span></li>`;
       return;
     }
-    arr.forEach((v, idx) => {
+    arr.forEach((v, i) => {
       const li = document.createElement("li");
       li.className = "score-item";
-      li.innerHTML = `<span class="idx">${idx+1}번</span><span class="val">${isDecimal ? fmtOneDecimal(v/10) : String(v)}</span>`;
+      li.innerHTML = `<span class="idx">${i+1}번</span><span class="val">${isDecimal ? fmtOne(v / 10) : String(v)}</span>`;
       ul.appendChild(li);
     });
   }
@@ -897,37 +700,44 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
 
     const mcSum = (sum(result.mcHigh) + sum(result.mcMid) + sum(result.mcLow)) / 10;
     const saSum = sum(result.saHigh) + sum(result.saMid) + sum(result.saLow);
-    $("sumMC").textContent = fmtOneDecimal(mcSum);
+
+    $("sumMC").textContent = fmtOne(mcSum);
     $("sumSA").textContent = String(saSum);
-    $("sumAll").textContent = fmtOneDecimal(mcSum + saSum);
+    $("sumAll").textContent = fmtOne(mcSum + saSum);
+  }
+
+  function clearResults(){
+    ["mcHighList","mcMidList","mcLowList","saHighList","saMidList","saLowList"].forEach(id => $(id).innerHTML = "");
+    $("sumMC").textContent = "0";
+    $("sumSA").textContent = "0";
+    $("sumAll").textContent = "0";
   }
 
   function generate(){
     clearMessage();
+    updateAutoFields();
+
     const errors = validateInput();
     if (errors.length){
       lastResult = null;
-      showMessage("입력값 검증 실패\n\n" + errors.join("\n"), "error");
+      clearResults();
+      showMessage("오류 및 해결방법\n\n" + errors.join("\n"), "error");
       return;
     }
 
-    const mc = generateMultipleChoiceV22(
-      intVal("B3"), intVal("B4"), intVal("B5"),
-      intVal("B8")*10, intVal("B9")*10, intVal("B10")*10
-    );
+    const mc = generateMultipleChoice();
     if (!mc.ok){
       lastResult = null;
-      showMessage(`선택형 배점 생성 불가\n\n[불가 사유]\n${mc.reason}\n\n[해결 방법]\n${mc.solution}`, "error");
+      clearResults();
+      showMessage(`오류 및 해결방법\n\n[실패 사유]\n${mc.reason}\n\n[해결 방법]\n${mc.solution}`, "error");
       return;
     }
 
-    const sa = generateShortAnswerV2(
-      intVal("C3"), intVal("C4"), intVal("C5"),
-      intVal("C8"), intVal("C9"), intVal("C10")
-    );
+    const sa = generateShortAnswer();
     if (!sa.ok){
       lastResult = null;
-      showMessage(`서답형 배점 생성 불가\n\n[불가 사유]\n${sa.reason}\n\n[해결 방법]\n${sa.solution}`, "error");
+      clearResults();
+      showMessage(`오류 및 해결방법\n\n[실패 사유]\n${sa.reason}\n\n[해결 방법]\n${sa.solution}`, "error");
       return;
     }
 
@@ -939,31 +749,22 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
       saMid: sa.arrM,
       saLow: sa.arrL
     };
+
     renderResults(lastResult);
-    showMessage("배점 생성이 완료되었습니다. 아래에서 결과를 확인하고 XLSX 파일로 내려받을 수 있습니다.", "success");
+    showMessage("배점 생성이 완료되었습니다.", "success");
   }
 
   function resetDefaults(){
-    Object.entries(defaults).forEach(([id, val]) => $(id).value = val);
-    recalcTotals();
+    numericIds.forEach(id => $(id).value = defaults[id]);
+    updateAutoFields();
     clearMessage();
+    clearResults();
     lastResult = null;
-    ["mcHighList","mcMidList","mcLowList","saHighList","saMidList","saLowList"].forEach(id => $(id).innerHTML = "");
-    $("sumMC").textContent = "0";
-    $("sumSA").textContent = "0";
-    $("sumAll").textContent = "0";
   }
 
-  // --- XLSX minimal writer ---
   function escapeXml(s){
-    return String(s)
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;')
-      .replace(/'/g,'&apos;');
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
   }
-
   function colLetter(n){
     let s = "";
     while(n > 0){
@@ -973,41 +774,29 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
     }
     return s;
   }
-
-  function sheetXmlFromCells(name, cells, merges=[]){
+  function sheetXmlFromCells(cells, merges=[]){
     const rows = new Map();
     let maxR = 1, maxC = 1;
-
     for (const [addr, cell] of Object.entries(cells)){
       const match = addr.match(/^([A-Z]+)(\d+)$/);
       if (!match) continue;
       const row = parseInt(match[2],10);
-      const col = (() => {
-        let n = 0;
-        for (const ch of match[1]) n = n*26 + ch.charCodeAt(0) - 64;
-        return n;
-      })();
+      let col = 0;
+      for (const ch of match[1]) col = col * 26 + ch.charCodeAt(0) - 64;
       maxR = Math.max(maxR, row);
       maxC = Math.max(maxC, col);
       if (!rows.has(row)) rows.set(row, []);
       rows.get(row).push({addr, col, ...cell});
     }
-
     const rowXml = [];
     Array.from(rows.keys()).sort((a,b)=>a-b).forEach(r => {
-      const cellsArr = rows.get(r).sort((a,b)=>a.col-b.col).map(c => {
-        if (c.type === "n"){
-          return `<c r="${c.addr}"><v>${c.value}</v></c>`;
-        }
+      const cellsXml = rows.get(r).sort((a,b)=>a.col-b.col).map(c => {
+        if (c.type === "n") return `<c r="${c.addr}"><v>${c.value}</v></c>`;
         return `<c r="${c.addr}" t="inlineStr"><is><t>${escapeXml(c.value ?? "")}</t></is></c>`;
       }).join("");
-      rowXml.push(`<row r="${r}">${cellsArr}</row>`);
+      rowXml.push(`<row r="${r}">${cellsXml}</row>`);
     });
-
-    const mergeXml = merges.length
-      ? `<mergeCells count="${merges.length}">${merges.map(m=>`<mergeCell ref="${m}"/>`).join("")}</mergeCells>`
-      : "";
-
+    const mergeXml = merges.length ? `<mergeCells count="${merges.length}">${merges.map(m=>`<mergeCell ref="${m}"/>`).join("")}</mergeCells>` : "";
     return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
   <dimension ref="A1:${colLetter(maxC)}${maxR}"/>
@@ -1017,14 +806,12 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
   ${mergeXml}
 </worksheet>`;
   }
-
   function makeWorkbookXml(){
     return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
- xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
   <sheets>
-    <sheet name="입력" sheetId="1" r:id="rId1"/>
-    <sheet name="출력" sheetId="2" r:id="rId2"/>
+    <sheet name="기초자료" sheetId="1" r:id="rId1"/>
+    <sheet name="문항 배점표" sheetId="2" r:id="rId2"/>
   </sheets>
 </workbook>`;
   }
@@ -1051,11 +838,13 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
   <Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
 </Types>`;
   }
-
+  function strToU8(str){ return new TextEncoder().encode(str); }
+  function u16(n){ return [n & 255, (n>>>8)&255]; }
+  function u32(n){ return [n & 255, (n>>>8)&255, (n>>>16)&255, (n>>>24)&255]; }
   function crc32(buf){
     let c;
     const table = crc32.table || (crc32.table = (() => {
-      let t = [];
+      const t = [];
       for (let n = 0; n < 256; n++) {
         c = n;
         for (let k = 0; k < 8; k++) c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
@@ -1067,12 +856,6 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
     for (let i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xFF];
     return (crc ^ (-1)) >>> 0;
   }
-
-  function strToU8(str){ return new TextEncoder().encode(str); }
-
-  function u16(n){ return [n & 255, (n>>>8)&255]; }
-  function u32(n){ return [n & 255, (n>>>8)&255, (n>>>16)&255, (n>>>24)&255]; }
-
   function zipStore(files){
     let localParts = [];
     let centralParts = [];
@@ -1083,35 +866,27 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
       const data = file.data instanceof Uint8Array ? file.data : strToU8(file.data);
       const crc = crc32(data);
       const localHeader = new Uint8Array([
-        ...u32(0x04034b50),
-        ...u16(20), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
-        ...u32(crc), ...u32(data.length), ...u32(data.length),
-        ...u16(nameBytes.length), ...u16(0),
-        ...nameBytes
+        ...u32(0x04034b50), ...u16(20), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
+        ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nameBytes.length), ...u16(0), ...nameBytes
       ]);
       localParts.push(localHeader, data);
 
       const centralHeader = new Uint8Array([
-        ...u32(0x02014b50),
-        ...u16(20), ...u16(20), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
+        ...u32(0x02014b50), ...u16(20), ...u16(20), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
         ...u32(crc), ...u32(data.length), ...u32(data.length),
         ...u16(nameBytes.length), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
-        ...u32(0), ...u32(offset),
-        ...nameBytes
+        ...u32(0), ...u32(offset), ...nameBytes
       ]);
       centralParts.push(centralHeader);
-
       offset += localHeader.length + data.length;
     });
 
     const centralSize = centralParts.reduce((n,p)=>n+p.length,0);
     const centralOffset = offset;
     const end = new Uint8Array([
-      ...u32(0x06054b50),
-      ...u16(0), ...u16(0),
+      ...u32(0x06054b50), ...u16(0), ...u16(0),
       ...u16(files.length), ...u16(files.length),
-      ...u32(centralSize), ...u32(centralOffset),
-      ...u16(0)
+      ...u32(centralSize), ...u32(centralOffset), ...u16(0)
     ]);
 
     const totalLength = localParts.reduce((n,p)=>n+p.length,0) + centralSize + end.length;
@@ -1125,53 +900,45 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
   }
 
   function buildWorkbookFiles(){
-    recalcTotals();
+    updateAutoFields();
+
+    const totalCnt = n("mcCount") + n("saCount");
+    const totalScore = n("mcScore") + n("saScore");
 
     const inputCells = {
-      A1:{type:"s", value:"구분"},
-      B1:{type:"s", value:"선택형"},
-      C1:{type:"s", value:"서답형"},
-      D1:{type:"s", value:"합계"},
-      E1:{type:"s", value:"비율"},
-
-      A2:{type:"s", value:"문항개수"},
-      B2:{type:"n", value:intVal("B2")},
-      C2:{type:"n", value:intVal("C2")},
-      D2:{type:"n", value:Number($("D2").textContent)},
-
-      A3:{type:"s", value:"상"}, B3:{type:"n", value:intVal("B3")}, C3:{type:"n", value:intVal("C3")}, D3:{type:"n", value:Number($("D3").textContent)}, E3:{type:"s", value:$("E3").value},
-      A4:{type:"s", value:"중"}, B4:{type:"n", value:intVal("B4")}, C4:{type:"n", value:intVal("C4")}, D4:{type:"n", value:Number($("D4").textContent)}, E4:{type:"s", value:$("E4").value},
-      A5:{type:"s", value:"하"}, B5:{type:"n", value:intVal("B5")}, C5:{type:"n", value:intVal("C5")}, D5:{type:"n", value:Number($("D5").textContent)}, E5:{type:"s", value:$("E5").value},
-      A6:{type:"s", value:"합계"}, B6:{type:"n", value:Number($("B6").textContent)}, C6:{type:"n", value:Number($("C6").textContent)}, D6:{type:"n", value:Number($("D6").textContent)}, E6:{type:"s", value:$("E6").value},
-
-      A8:{type:"s", value:"문항점수"},
-      B8:{type:"n", value:intVal("B7")},
-      C8:{type:"n", value:intVal("C7")},
-      D8:{type:"n", value:Number($("D7").textContent)},
-
-      A9:{type:"s", value:"상"}, B9:{type:"n", value:intVal("B8")}, C9:{type:"n", value:intVal("C8")}, D9:{type:"n", value:Number($("D8").textContent)}, E9:{type:"s", value:$("E8").value},
-      A10:{type:"s", value:"중"}, B10:{type:"n", value:intVal("B9")}, C10:{type:"n", value:intVal("C9")}, D10:{type:"n", value:Number($("D9").textContent)}, E10:{type:"s", value:$("E9").value},
-      A11:{type:"s", value:"하"}, B11:{type:"n", value:intVal("B10")}, C11:{type:"n", value:intVal("C10")}, D11:{type:"n", value:Number($("D10").textContent)}, E11:{type:"s", value:$("E10").value},
-      A12:{type:"s", value:"합계"}, B12:{type:"n", value:Number($("B11").textContent)}, C12:{type:"n", value:Number($("C11").textContent)}, D12:{type:"n", value:Number($("D11").textContent)}, E12:{type:"s", value:$("E11").value}
+      A1:{type:"s", value:"구분"}, B1:{type:"s", value:"선택형"}, C1:{type:"s", value:"서답형"}, D1:{type:"s", value:"비율"},
+      A2:{type:"s", value:"문항개수"}, B2:{type:"n", value:n("mcCount")}, C2:{type:"n", value:n("saCount")},
+      A3:{type:"s", value:"상"}, B3:{type:"n", value:n("mcHCnt")}, C3:{type:"n", value:n("saHCnt")}, D3:{type:"s", value:$("ratioCntH").textContent},
+      A4:{type:"s", value:"중"}, B4:{type:"n", value:n("mcMCnt")}, C4:{type:"n", value:n("saMCnt")}, D4:{type:"s", value:$("ratioCntM").textContent},
+      A5:{type:"s", value:"하"}, B5:{type:"n", value:n("mcLCnt")}, C5:{type:"n", value:n("saLCnt")}, D5:{type:"s", value:$("ratioCntL").textContent},
+      A6:{type:"s", value:"합계"}, B6:{type:"n", value:Number($("mcCntSum").textContent || 0)}, C6:{type:"n", value:Number($("saCntSum").textContent || 0)}, D6:{type:"s", value:"100%"},
+      A8:{type:"s", value:"문항점수"}, B8:{type:"n", value:n("mcScore")}, C8:{type:"n", value:n("saScore")},
+      A9:{type:"s", value:"상"}, B9:{type:"n", value:n("mcHScore")}, C9:{type:"n", value:n("saHScore")}, D9:{type:"s", value:$("ratioScoreH").textContent},
+      A10:{type:"s", value:"중"}, B10:{type:"n", value:n("mcMScore")}, C10:{type:"n", value:n("saMScore")}, D10:{type:"s", value:$("ratioScoreM").textContent},
+      A11:{type:"s", value:"하"}, B11:{type:"n", value:n("mcLScore")}, C11:{type:"n", value:n("saLScore")}, D11:{type:"s", value:$("ratioScoreL").textContent},
+      A12:{type:"s", value:"합계"}, B12:{type:"n", value:Number($("mcScoreSum").textContent || 0)}, C12:{type:"n", value:Number($("saScoreSum").textContent || 0)}, D12:{type:"s", value:"100%"}
     };
 
     const outputCells = {
-      J1:{type:"s", value:"선택형"}, K1:{type:"s", value:"상"}, L1:{type:"s", value:"중"}, M1:{type:"s", value:"하"},
-      N1:{type:"s", value:"서답형"}, O1:{type:"s", value:"상"}, P1:{type:"s", value:"중"}, Q1:{type:"s", value:"하"}
+      A1:{type:"s", value:"선택형 상"},
+      B1:{type:"s", value:"선택형 중"},
+      C1:{type:"s", value:"선택형 하"},
+      E1:{type:"s", value:"서답형 상"},
+      F1:{type:"s", value:"서답형 중"},
+      G1:{type:"s", value:"서답형 하"}
     };
 
     if (lastResult){
-      lastResult.mcHigh.forEach((v,i)=> outputCells[`K${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
-      lastResult.mcMid.forEach((v,i)=> outputCells[`L${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
-      lastResult.mcLow.forEach((v,i)=> outputCells[`M${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
-
-      lastResult.saHigh.forEach((v,i)=> outputCells[`O${i+2}`] = {type:"n", value:v});
-      lastResult.saMid.forEach((v,i)=> outputCells[`P${i+2}`] = {type:"n", value:v});
-      lastResult.saLow.forEach((v,i)=> outputCells[`Q${i+2}`] = {type:"n", value:v});
+      lastResult.mcHigh.forEach((v,i)=> outputCells[`A${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
+      lastResult.mcMid.forEach((v,i)=> outputCells[`B${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
+      lastResult.mcLow.forEach((v,i)=> outputCells[`C${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
+      lastResult.saHigh.forEach((v,i)=> outputCells[`E${i+2}`] = {type:"n", value:v});
+      lastResult.saMid.forEach((v,i)=> outputCells[`F${i+2}`] = {type:"n", value:v});
+      lastResult.saLow.forEach((v,i)=> outputCells[`G${i+2}`] = {type:"n", value:v});
     }
 
-    const sheet1 = sheetXmlFromCells("입력", inputCells);
-    const sheet2 = sheetXmlFromCells("출력", outputCells, ["J1:M1","N1:Q1"]);
+    const sheet1 = sheetXmlFromCells(inputCells);
+    const sheet2 = sheetXmlFromCells(outputCells);
 
     return [
       { name:"[Content_Types].xml", data: makeContentTypesXml() },
@@ -1191,33 +958,26 @@ min(상) > max(중), min(중) > max(하) 조건을 만족하는 조합을 찾지
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url), 1000);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   function downloadXlsx(){
     if (!lastResult){
-      showMessage("먼저 배점을 생성해 주세요. 생성된 결과가 있어야 XLSX 파일을 만들 수 있습니다.", "error");
+      showMessage("오류 및 해결방법\n\n먼저 배점을 생성해 주세요.", "error");
       return;
     }
     const files = buildWorkbookFiles();
-    const zipBytes = zipStore(files);
-    const blob = new Blob([zipBytes], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-    downloadBlob("문항배점표.xlsx", blob);
+    const bytes = zipStore(files);
+    const blob = new Blob([bytes], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+    downloadBlob("문항_배점_생성기.xlsx", blob);
   }
 
-  inputIds.forEach(id => {
-    $(id).addEventListener("input", recalcTotals);
-  });
-
+  numericIds.forEach(id => $(id).addEventListener("input", updateAutoFields));
   $("generateBtn").addEventListener("click", generate);
-  $("recalcBtn").addEventListener("click", () => {
-    recalcTotals();
-    showMessage("합계를 다시 계산했습니다.", "success");
-  });
   $("resetBtn").addEventListener("click", resetDefaults);
   $("downloadBtn").addEventListener("click", downloadXlsx);
 
-  recalcTotals();
+  updateAutoFields();
 })();
 </script>
 </body>
