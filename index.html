@@ -16,217 +16,215 @@
     --accent2:#7a5cff;
     --success:#13b981;
     --error:#ef4444;
-    --shadow:0 18px 45px rgba(29, 41, 77, 0.08);
+    --shadow:0 18px 45px rgba(29,41,77,.08);
     --radius:24px;
   }
   *{box-sizing:border-box}
   body{
     margin:0;
-    font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family:Inter,Pretendard,"Noto Sans KR",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     color:var(--text);
     background:
-      radial-gradient(1200px 800px at 0% 0%, #ffffff 0%, rgba(255,255,255,.6) 45%, transparent 70%),
-      linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
+      radial-gradient(1200px 800px at 0% 0%,#ffffff 0%,rgba(255,255,255,.6) 45%,transparent 70%),
+      linear-gradient(180deg,var(--bg2) 0%,var(--bg1) 100%);
+    min-height:100vh;
   }
-  .wrap{
-    max-width:1280px;
-    margin:0 auto;
-    padding:28px 18px 56px;
+  .wrap{max-width:1280px;margin:0 auto;padding:28px 18px 56px}
+
+  /* ── 타이틀 & 모드 탭 ── */
+  .title{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:-.03em;margin:8px 0 18px}
+  .mode-tabs{display:flex;gap:8px;margin-bottom:24px}
+  .mode-tab{
+    padding:11px 26px;border-radius:50px;font-size:14px;font-weight:800;
+    border:2px solid var(--line);background:var(--card);color:var(--muted);
+    cursor:pointer;transition:.18s ease;
   }
-  .title{
-    font-size:clamp(28px, 4vw, 42px);
-    font-weight:900;
-    letter-spacing:-0.03em;
-    margin:8px 0 20px;
+  .mode-tab:hover{border-color:var(--accent);color:var(--accent)}
+  .mode-tab.active{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;border-color:transparent;
+    box-shadow:0 8px 24px rgba(91,124,255,.28);
   }
-  .layout{
-    display:grid;
-    grid-template-columns: 1.05fr .95fr;
-    gap:20px;
+
+  /* ── 카드 공통 ── */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .panel{padding:22px}
+  h2{margin:0 0 16px;font-size:20px;letter-spacing:-.02em}
+
+  /* ── 기본모드 테이블 ── */
+  .layout{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+  table{width:100%;border-collapse:collapse}
+  th,td{border:1px solid var(--line);padding:11px 10px;text-align:center}
+  th{background:#f8faff;font-weight:800}
+  td.label{text-align:left;font-weight:800;background:#fbfcff;padding-left:12px}
+  td.auto{background:#f8fbff;font-weight:700;color:#334155}
+  input[type=number],input[type=text]{
+    width:100%;border:1px solid #d9e1f0;border-radius:12px;
+    padding:10px 12px;font-size:14px;color:var(--text);background:#fff;outline:none;
   }
-  .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-  }
-  .panel{
-    padding:22px;
-  }
-  h2{
-    margin:0 0 16px;
-    font-size:20px;
-    letter-spacing:-0.02em;
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-  }
-  th,td{
-    border:1px solid var(--line);
-    padding:11px 10px;
-    text-align:center;
-  }
-  th{
-    background:#f8faff;
-    font-weight:800;
-  }
-  td.label{
-    text-align:left;
-    font-weight:800;
-    background:#fbfcff;
-    padding-left:12px;
-  }
-  td.auto{
-    background:#f8fbff;
-    font-weight:700;
-    color:#334155;
-  }
-  input{
-    width:100%;
-    border:1px solid #d9e1f0;
-    border-radius:12px;
-    padding:10px 12px;
-    font-size:14px;
-    color:var(--text);
-    background:white;
-    outline:none;
-  }
-  input:focus{
-    border-color:#89a0ff;
-    box-shadow:0 0 0 4px rgba(91,124,255,.12);
-  }
-  .tools{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:16px;
-  }
+  input:focus{border-color:#89a0ff;box-shadow:0 0 0 4px rgba(91,124,255,.12)}
+  .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
   button{
-    appearance:none;
-    border:none;
-    cursor:pointer;
-    padding:13px 17px;
-    border-radius:14px;
-    font-size:14px;
-    font-weight:800;
-    transition:.15s ease;
+    appearance:none;border:none;cursor:pointer;padding:13px 17px;
+    border-radius:14px;font-size:14px;font-weight:800;transition:.15s ease;
   }
-  button:hover{ transform:translateY(-1px); }
-  .btn-primary{
-    background:linear-gradient(135deg, var(--accent), var(--accent2));
-    color:white;
-    box-shadow:0 14px 30px rgba(91,124,255,.22);
+  button:hover{transform:translateY(-1px)}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 14px 30px rgba(91,124,255,.22)}
+  .btn-secondary{background:#f5f7fc;color:#334155;border:1px solid var(--line)}
+  .btn-download{width:100%;background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;box-shadow:0 14px 30px rgba(37,99,235,.18)}
+  .btn-warn{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;box-shadow:0 8px 20px rgba(217,119,6,.2)}
+  .message{margin-top:16px;border-radius:16px;padding:14px 16px;line-height:1.65;font-size:14px;display:none;white-space:pre-wrap}
+  .message.error{display:block;background:#fff4f4;border:1px solid #ffcaca;color:#9f1239}
+  .message.success{display:block;background:#f0fdf6;border:1px solid #bbe9cf;color:#166534}
+  .results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .box{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fcfdff}
+  .box-head{padding:12px 14px;font-weight:900;background:#f8faff;border-bottom:1px solid var(--line)}
+  .score-list{list-style:none;margin:0;padding:12px;display:grid;gap:8px;min-height:70px}
+  .score-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid #edf1f7;background:#fff;font-variant-numeric:tabular-nums}
+  .score-item .idx{font-size:12px;color:var(--muted);font-weight:800}
+  .score-item .val{font-size:15px;font-weight:900}
+  .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .summary-card{padding:14px;border-radius:16px;border:1px solid var(--line);background:#fbfcff}
+  .summary-card .small{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .summary-card .big{font-size:23px;font-weight:900}
+  .download-wrap{margin-top:20px}
+  .section-gap{height:8px}
+
+  /* ── 진행 표시줄 ── */
+  .step-progress{
+    display:flex;align-items:center;margin-bottom:20px;
+    background:var(--card);border:1px solid var(--line);
+    border-radius:50px;padding:12px 20px;
+    box-shadow:0 4px 16px rgba(29,41,77,.05);
   }
-  .btn-secondary{
-    background:#f5f7fc;
-    color:#334155;
-    border:1px solid var(--line);
+  .sp-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex:0 0 auto}
+  .sp-dot{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--line);color:var(--muted);
+    font-size:12px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+    transition:.2s;
   }
-  .btn-download{
-    width:100%;
-    background:linear-gradient(135deg, #0ea5e9, #2563eb);
-    color:white;
-    box-shadow:0 14px 30px rgba(37,99,235,.18);
+  .sp-item.active .sp-dot{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 12px rgba(91,124,255,.3)}
+  .sp-item.done .sp-dot{background:var(--success);color:#fff}
+  .sp-label{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .sp-item.active .sp-label{color:var(--accent)}
+  .sp-item.done .sp-label{color:var(--success)}
+  .sp-line{flex:1;height:2px;background:var(--line);margin:0 6px;margin-bottom:14px;transition:.2s}
+  .sp-line.done{background:var(--success)}
+
+  /* ── STEP 2: 점수 설정 ── */
+  .s2-field-label{font-size:13px;font-weight:800;color:var(--muted);margin-bottom:8px}
+  .s2-hint-text{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:20px;padding:8px 12px;background:rgba(91,124,255,.06);border-radius:10px}
+  .s2-score-grid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:16px}
+  .s2-score-card{
+    background:#f8faff;border:2px solid var(--line);
+    border-radius:18px;padding:16px;text-align:center;
   }
-  .message{
-    margin-top:16px;
-    border-radius:16px;
-    padding:14px 16px;
-    line-height:1.65;
-    font-size:14px;
-    display:none;
-    white-space:pre-wrap;
+  .s2-score-icon{font-size:22px;margin-bottom:6px}
+  .s2-score-title{font-size:12px;font-weight:800;color:var(--muted);margin-bottom:10px}
+  .s2-score-input{text-align:center;font-size:20px;font-weight:900;padding:10px 36px 10px 10px}
+  .s2-score-plus{font-size:24px;font-weight:900;color:var(--muted);text-align:center;padding-bottom:8px}
+  .s2-sum-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;border-radius:14px;
+    background:#f8faff;border:1px solid var(--line);
   }
-  .message.error{
-    display:block;
-    background:#fff4f4;
-    border:1px solid #ffcaca;
-    color:#9f1239;
+  .s2-sum-label{font-size:13px;font-weight:800;color:var(--muted)}
+  .s2-sum-val{font-size:20px;font-weight:900}
+  .s2-sum-val.ok{color:var(--success)}
+  .s2-sum-val.ng{color:var(--error)}
+  @media(max-width:480px){
+    .s2-score-grid{grid-template-columns:1fr;gap:8px}
+    .s2-score-plus{padding:0;font-size:18px}
   }
-  .message.success{
-    display:block;
-    background:#f0fdf6;
-    border:1px solid #bbe9cf;
-    color:#166534;
+
+  /* ── 간편모드 ── */
+  #easyMode{max-width:640px;margin:0 auto}
+  .easy-step{display:none}
+  .easy-step.active{display:block}
+
+  .step-header{
+    display:flex;align-items:center;gap:12px;margin-bottom:20px;
   }
-  .results{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:14px;
+  .step-badge{
+    width:32px;height:32px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;font-weight:900;font-size:14px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
   }
-  .box{
-    border:1px solid var(--line);
-    border-radius:18px;
-    overflow:hidden;
-    background:#fcfdff;
+  .step-title{font-size:18px;font-weight:900;letter-spacing:-.02em}
+
+  .big-input-wrap{display:flex;gap:10px;align-items:stretch}
+  .big-input{
+    flex:1;border:2px solid var(--line);border-radius:16px;
+    padding:16px 18px;font-size:28px;font-weight:900;color:var(--text);
+    background:#fff;outline:none;text-align:center;
   }
-  .box-head{
-    padding:12px 14px;
-    font-weight:900;
-    background:#f8faff;
-    border-bottom:1px solid var(--line);
+  .big-input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(91,124,255,.12)}
+  .btn-confirm{
+    padding:0 22px;border-radius:16px;font-size:15px;font-weight:800;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;border:none;cursor:pointer;white-space:nowrap;
+    box-shadow:0 8px 20px rgba(91,124,255,.25);
   }
-  .score-list{
-    list-style:none;
-    margin:0;
-    padding:12px;
-    display:grid;
-    gap:8px;
-    min-height:70px;
+
+  .ratio-mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .ratio-mode-card{
+    padding:18px;border-radius:18px;border:2px solid var(--line);
+    background:#fff;cursor:pointer;transition:.18s;text-align:center;
   }
-  .score-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 12px;
-    border-radius:12px;
-    border:1px solid #edf1f7;
-    background:white;
-    font-variant-numeric: tabular-nums;
+  .ratio-mode-card:hover{border-color:var(--accent)}
+  .ratio-mode-card.selected{border-color:var(--accent);background:linear-gradient(135deg,rgba(91,124,255,.06),rgba(122,92,255,.06))}
+  .ratio-mode-card .icon{font-size:28px;margin-bottom:8px}
+  .ratio-mode-card .rm-title{font-weight:900;font-size:15px;margin-bottom:4px}
+  .ratio-mode-card .rm-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+  .ratio-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin-bottom:12px}
+  .ratio-label{font-weight:900;font-size:15px;min-width:28px}
+  .ratio-input-wrap{position:relative}
+  .ratio-input{
+    width:100%;border:2px solid var(--line);border-radius:12px;
+    padding:12px 36px 12px 14px;font-size:16px;font-weight:700;
+    color:var(--text);background:#fff;outline:none;
   }
-  .score-item .idx{
-    font-size:12px;
-    color:var(--muted);
-    font-weight:800;
+  .ratio-input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(91,124,255,.12)}
+  .ratio-unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:800;font-size:14px}
+  .ratio-total{
+    font-size:13px;font-weight:800;padding:10px 14px;border-radius:12px;
+    background:#f8faff;border:1px solid var(--line);text-align:center;margin-bottom:16px;
   }
-  .score-item .val{
-    font-size:15px;
-    font-weight:900;
+  .ratio-total.ok{color:var(--success)}
+  .ratio-total.ng{color:var(--error)}
+
+  .easy-result-info{
+    padding:14px 16px;border-radius:16px;background:#f0fdf6;
+    border:1px solid #bbe9cf;color:#166534;font-size:14px;
+    line-height:1.7;margin-bottom:16px;
   }
-  .summary{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:16px;
+  .easy-result-info strong{font-weight:900}
+
+  .btn-to-basic{
+    background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;
+    box-shadow:0 8px 20px rgba(217,119,6,.2);
+    display:flex;align-items:center;gap:8px;
   }
-  .summary-card{
-    padding:14px;
-    border-radius:16px;
-    border:1px solid var(--line);
-    background:#fbfcff;
+
+  /* ── 정보 칩 ── */
+  .info-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .chip{
+    padding:6px 14px;border-radius:50px;font-size:13px;font-weight:700;
+    background:#f0f4ff;color:#3b5bdb;border:1px solid #c5d0f5;
   }
-  .summary-card .small{
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:6px;
-  }
-  .summary-card .big{
-    font-size:23px;
-    font-weight:900;
-  }
-  .download-wrap{
-    margin-top:20px;
-  }
-  .section-gap{ height:8px; }
-  @media (max-width: 1100px){
-    .layout{ grid-template-columns:1fr; }
-  }
-  @media (max-width: 760px){
-    .results{ grid-template-columns:1fr; }
-    .summary{ grid-template-columns:1fr; }
-    .panel{ padding:16px; }
-    th,td{ padding:9px 6px; font-size:13px; }
+
+  /* ── 반응형 ── */
+  @media(max-width:1100px){.layout{grid-template-columns:1fr}}
+  @media(max-width:760px){
+    .results{grid-template-columns:1fr}
+    .summary{grid-template-columns:1fr}
+    .panel{padding:16px}
+    th,td{padding:9px 6px;font-size:13px}
+    .ratio-mode-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -234,750 +232,1010 @@
 <div class="wrap">
   <div class="title">문항 배점 생성기</div>
 
-  <div class="layout">
-    <section class="card panel">
-      <h2>기초자료 입력</h2>
-      <table>
-        <thead>
-          <tr>
-            <th style="width:120px">구분</th>
-            <th>선택형</th>
-            <th>서답형</th>
-            <th>비율</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label">문항개수</td>
-            <td><input id="mcCount" type="number" step="1" value="16"></td>
-            <td><input id="saCount" type="number" step="1" value="6"></td>
-            <td class="auto"></td>
-          </tr>
-          <tr>
-            <td class="label">상</td>
-            <td><input id="mcHCnt" type="number" step="1" value="3"></td>
-            <td><input id="saHCnt" type="number" step="1" value="2"></td>
-            <td class="auto" id="ratioCntH"></td>
-          </tr>
-          <tr>
-            <td class="label">중</td>
-            <td><input id="mcMCnt" type="number" step="1" value="7"></td>
-            <td><input id="saMCnt" type="number" step="1" value="4"></td>
-            <td class="auto" id="ratioCntM"></td>
-          </tr>
-          <tr>
-            <td class="label">하</td>
-            <td><input id="mcLCnt" type="number" step="1" value="6"></td>
-            <td><input id="saLCnt" type="number" step="1" value="0"></td>
-            <td class="auto" id="ratioCntL"></td>
-          </tr>
-          <tr>
-            <td class="label">합계</td>
-            <td class="auto" id="mcCntSum"></td>
-            <td class="auto" id="saCntSum"></td>
-            <td class="auto" id="ratioCntSum"></td>
-          </tr>
-
-          <tr class="section-gap"><td colspan="4" style="border:none;background:transparent"></td></tr>
-
-          <tr>
-            <td class="label">문항점수</td>
-            <td><input id="mcScore" type="number" step="1" value="50"></td>
-            <td><input id="saScore" type="number" step="1" value="50"></td>
-            <td class="auto"></td>
-          </tr>
-          <tr>
-            <td class="label">상</td>
-            <td><input id="mcHScore" type="number" step="1" value="15"></td>
-            <td><input id="saHScore" type="number" step="1" value="20"></td>
-            <td class="auto" id="ratioScoreH"></td>
-          </tr>
-          <tr>
-            <td class="label">중</td>
-            <td><input id="mcMScore" type="number" step="1" value="23"></td>
-            <td><input id="saMScore" type="number" step="1" value="30"></td>
-            <td class="auto" id="ratioScoreM"></td>
-          </tr>
-          <tr>
-            <td class="label">하</td>
-            <td><input id="mcLScore" type="number" step="1" value="12"></td>
-            <td><input id="saLScore" type="number" step="1" value="0"></td>
-            <td class="auto" id="ratioScoreL"></td>
-          </tr>
-          <tr>
-            <td class="label">합계</td>
-            <td class="auto" id="mcScoreSum"></td>
-            <td class="auto" id="saScoreSum"></td>
-            <td class="auto" id="ratioScoreSum"></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tools">
-        <button class="btn-primary" id="generateBtn">배점 생성</button>
-        <button class="btn-secondary" id="resetBtn">기본값 복원</button>
-      </div>
-
-      <div id="message" class="message"></div>
-    </section>
-
-    <section class="card panel">
-      <h2>문항 배점표</h2>
-
-      <div class="results">
-        <div class="box">
-          <div class="box-head">선택형 상</div>
-          <ul class="score-list" id="mcHighList"></ul>
-        </div>
-        <div class="box">
-          <div class="box-head">서답형 상</div>
-          <ul class="score-list" id="saHighList"></ul>
-        </div>
-        <div class="box">
-          <div class="box-head">선택형 중</div>
-          <ul class="score-list" id="mcMidList"></ul>
-        </div>
-        <div class="box">
-          <div class="box-head">서답형 중</div>
-          <ul class="score-list" id="saMidList"></ul>
-        </div>
-        <div class="box">
-          <div class="box-head">선택형 하</div>
-          <ul class="score-list" id="mcLowList"></ul>
-        </div>
-        <div class="box">
-          <div class="box-head">서답형 하</div>
-          <ul class="score-list" id="saLowList"></ul>
-        </div>
-      </div>
-
-      <div class="summary">
-        <div class="summary-card">
-          <div class="small">선택형 총점</div>
-          <div class="big" id="sumMC">0</div>
-        </div>
-        <div class="summary-card">
-          <div class="small">서답형 총점</div>
-          <div class="big" id="sumSA">0</div>
-        </div>
-        <div class="summary-card">
-          <div class="small">전체 총점</div>
-          <div class="big" id="sumAll">0</div>
-        </div>
-      </div>
-
-      <div class="download-wrap">
-        <h2 style="margin-bottom:12px;">내려받기</h2>
-        <button class="btn-download" id="downloadBtn">XLSX 파일로 내려받기</button>
-      </div>
-    </section>
+  <!-- 모드 탭 -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabEasy" onclick="switchMode('easy')">⚡ 간편모드</button>
+    <button class="mode-tab" id="tabBasic" onclick="switchMode('basic')">⚙️ 기본모드</button>
   </div>
+
+  <!-- ════════════════ 간편모드 ════════════════ -->
+  <div id="easyMode">
+
+    <!-- 진행 표시줄 -->
+    <div class="step-progress" id="stepProgress">
+      <div class="sp-item active" id="sp1"><div class="sp-dot">1</div><div class="sp-label">문항 수</div></div>
+      <div class="sp-line"></div>
+      <div class="sp-item" id="sp2"><div class="sp-dot">2</div><div class="sp-label">점수 배분</div></div>
+      <div class="sp-line"></div>
+      <div class="sp-item" id="sp3"><div class="sp-dot">3</div><div class="sp-label">난이도 비율</div></div>
+      <div class="sp-line"></div>
+      <div class="sp-item" id="sp4"><div class="sp-dot">4</div><div class="sp-label">결과</div></div>
+    </div>
+
+    <!-- STEP 1: 총 문항 수 -->
+    <div class="card panel easy-step active" id="easyStep1">
+      <div class="step-header">
+        <div class="step-badge">1</div>
+        <div class="step-title">총 문항 수를 입력해 주세요</div>
+      </div>
+      <div class="big-input-wrap">
+        <input class="big-input" type="number" id="easyTotal" min="1" max="200" placeholder="예) 22" />
+      </div>
+      <button class="btn-primary" style="width:100%;padding:15px;margin-top:16px" onclick="easyStep1Next()">다음 단계 →</button>
+      <div id="easyStep1Msg" class="message"></div>
+    </div>
+
+    <!-- STEP 2 (신규): 총점 & 선택형/서답형 점수 -->
+    <div class="card panel easy-step" id="easyStep2" style="margin-top:16px">
+      <div class="step-header">
+        <div class="step-badge">2</div>
+        <div class="step-title">점수를 설정해 주세요</div>
+      </div>
+
+      <!-- 총점 입력 -->
+      <div class="s2-field-label">총점</div>
+      <div class="big-input-wrap" style="margin-bottom:6px">
+        <input class="big-input" type="number" id="easyTotalScore" min="1" max="9999" placeholder="예) 100" oninput="easyAutoDistScore()"/>
+      </div>
+      <div class="s2-hint-text">총점을 입력하면 선택형/서답형이 자동 분배됩니다</div>
+
+      <!-- 선택형 / 서답형 점수 -->
+      <div class="s2-score-grid">
+        <div class="s2-score-card">
+          <div class="s2-score-icon">📝</div>
+          <div class="s2-score-title">선택형 점수</div>
+          <div class="ratio-input-wrap">
+            <input class="ratio-input s2-score-input" type="number" id="easyMcScore" min="1" placeholder="예) 70" oninput="easyScoreChanged()"/>
+            <span class="ratio-unit">점</span>
+          </div>
+        </div>
+        <div class="s2-score-plus">+</div>
+        <div class="s2-score-card">
+          <div class="s2-score-icon">✏️</div>
+          <div class="s2-score-title">서답형 점수</div>
+          <div class="ratio-input-wrap">
+            <input class="ratio-input s2-score-input" type="number" id="easySaScore" min="1" placeholder="예) 30" oninput="easyScoreChanged()"/>
+            <span class="ratio-unit">점</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 합계 표시 -->
+      <div class="s2-sum-row">
+        <span class="s2-sum-label">합계</span>
+        <span class="s2-sum-val" id="easyScoreSum">—</span>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn-secondary" style="padding:13px 20px" onclick="showEasyStep(1)">← 이전</button>
+        <button class="btn-primary" style="flex:1;padding:15px" onclick="easyStep2Next()">다음 단계 →</button>
+      </div>
+      <div id="easyStep2Msg" class="message"></div>
+    </div>
+
+    <!-- STEP 3: 난이도 비율 -->
+    <div class="card panel easy-step" id="easyStep3" style="margin-top:16px">
+      <div class="step-header">
+        <div class="step-badge">3</div>
+        <div class="step-title">난이도 비율을 설정해 주세요</div>
+      </div>
+
+      <div class="ratio-mode-grid">
+        <div class="ratio-mode-card selected" id="rmCard0" onclick="selectRatioMode(0)">
+          <div class="icon">🔢</div>
+          <div class="rm-title">문항 수 기준</div>
+          <div class="rm-desc">상/중/하 문항 개수의<br>비율로 난이도를 설정합니다</div>
+        </div>
+        <div class="ratio-mode-card" id="rmCard1" onclick="selectRatioMode(1)">
+          <div class="icon">🏆</div>
+          <div class="rm-title">점수 합 기준</div>
+          <div class="rm-desc">상/중/하 배점 합계의<br>비율로 난이도를 설정합니다</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;font-size:13px;color:var(--muted);font-weight:600">
+        상/중/하 비율 입력 <span style="color:var(--accent)">(합계 = 100%)</span> &nbsp;·&nbsp; ±4% 범위 내 자동 조정
+      </div>
+
+      <div class="ratio-row">
+        <div class="ratio-label" style="color:#e74c3c">상</div>
+        <div class="ratio-input-wrap">
+          <input class="ratio-input" type="number" id="ratioH" min="0" max="100" value="25" oninput="updateRatioTotal()"/>
+          <span class="ratio-unit">%</span>
+        </div>
+      </div>
+      <div class="ratio-row">
+        <div class="ratio-label" style="color:#f39c12">중</div>
+        <div class="ratio-input-wrap">
+          <input class="ratio-input" type="number" id="ratioM" min="0" max="100" value="45" oninput="updateRatioTotal()"/>
+          <span class="ratio-unit">%</span>
+        </div>
+      </div>
+      <div class="ratio-row">
+        <div class="ratio-label" style="color:#27ae60">하</div>
+        <div class="ratio-input-wrap">
+          <input class="ratio-input" type="number" id="ratioL" min="0" max="100" value="30" oninput="updateRatioTotal()"/>
+          <span class="ratio-unit">%</span>
+        </div>
+      </div>
+      <div class="ratio-total" id="ratioTotal">합계: 100%</div>
+
+      <div style="display:flex;gap:10px">
+        <button class="btn-secondary" style="padding:13px 20px" onclick="showEasyStep(2)">← 이전</button>
+        <button class="btn-primary" style="flex:1;padding:15px" onclick="easyStep3Next()">배점 생성하기 →</button>
+      </div>
+      <div id="easyStep3Msg" class="message"></div>
+    </div>
+
+    <!-- STEP 4: 결과 -->
+    <div class="card panel easy-step" id="easyStep4" style="margin-top:16px">
+      <div class="step-header">
+        <div class="step-badge">4</div>
+        <div class="step-title">생성된 배점</div>
+      </div>
+
+      <div id="easyResultInfo" class="easy-result-info"></div>
+      <div class="info-chips" id="easyChips"></div>
+
+      <div class="results" id="easyResults"></div>
+
+      <div class="summary" id="easySummary">
+        <div class="summary-card"><div class="small">선택형 총점</div><div class="big" id="easySumMC">0</div></div>
+        <div class="summary-card"><div class="small">서답형 총점</div><div class="big" id="easySumSA">0</div></div>
+        <div class="summary-card"><div class="small">전체 총점</div><div class="big" id="easySumAll">0</div></div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+        <button class="btn-primary" onclick="easyRegenerate()" style="flex:1">🎲 다시 생성</button>
+        <button class="btn-to-basic" onclick="easyToBasic()">⚙️ 기본모드로 수정</button>
+        <button class="btn-download" style="flex:1;width:auto" onclick="easyDownload()">📥 XLSX 내려받기</button>
+      </div>
+      <div id="easyStep4Msg" class="message"></div>
+    </div>
+
+  </div><!-- /easyMode -->
+
+  <!-- ════════════════ 기본모드 ════════════════ -->
+  <div id="basicMode" style="display:none">
+    <div class="layout">
+      <section class="card panel">
+        <h2>기초자료 입력</h2>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:120px">구분</th>
+              <th>선택형</th>
+              <th>서답형</th>
+              <th>비율</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="label">문항개수</td>
+              <td><input id="mcCount" type="number" step="1" value="16"></td>
+              <td><input id="saCount" type="number" step="1" value="6"></td>
+              <td class="auto"></td>
+            </tr>
+            <tr>
+              <td class="label">상</td>
+              <td><input id="mcHCnt" type="number" step="1" value="3"></td>
+              <td><input id="saHCnt" type="number" step="1" value="2"></td>
+              <td class="auto" id="ratioCntH"></td>
+            </tr>
+            <tr>
+              <td class="label">중</td>
+              <td><input id="mcMCnt" type="number" step="1" value="7"></td>
+              <td><input id="saMCnt" type="number" step="1" value="4"></td>
+              <td class="auto" id="ratioCntM"></td>
+            </tr>
+            <tr>
+              <td class="label">하</td>
+              <td><input id="mcLCnt" type="number" step="1" value="6"></td>
+              <td><input id="saLCnt" type="number" step="1" value="0"></td>
+              <td class="auto" id="ratioCntL"></td>
+            </tr>
+            <tr>
+              <td class="label">합계</td>
+              <td class="auto" id="mcCntSum"></td>
+              <td class="auto" id="saCntSum"></td>
+              <td class="auto" id="ratioCntSum"></td>
+            </tr>
+
+            <tr class="section-gap"><td colspan="4" style="border:none;background:transparent"></td></tr>
+
+            <tr>
+              <td class="label">문항점수</td>
+              <td><input id="mcScore" type="number" step="1" value="50"></td>
+              <td><input id="saScore" type="number" step="1" value="50"></td>
+              <td class="auto"></td>
+            </tr>
+            <tr>
+              <td class="label">상</td>
+              <td><input id="mcHScore" type="number" step="1" value="15"></td>
+              <td><input id="saHScore" type="number" step="1" value="20"></td>
+              <td class="auto" id="ratioScoreH"></td>
+            </tr>
+            <tr>
+              <td class="label">중</td>
+              <td><input id="mcMScore" type="number" step="1" value="23"></td>
+              <td><input id="saMScore" type="number" step="1" value="30"></td>
+              <td class="auto" id="ratioScoreM"></td>
+            </tr>
+            <tr>
+              <td class="label">하</td>
+              <td><input id="mcLScore" type="number" step="1" value="12"></td>
+              <td><input id="saLScore" type="number" step="1" value="0"></td>
+              <td class="auto" id="ratioScoreL"></td>
+            </tr>
+            <tr>
+              <td class="label">합계</td>
+              <td class="auto" id="mcScoreSum"></td>
+              <td class="auto" id="saScoreSum"></td>
+              <td class="auto" id="ratioScoreSum"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="tools">
+          <button class="btn-primary" id="generateBtn">배점 생성</button>
+          <button class="btn-secondary" id="resetBtn">기본값 복원</button>
+        </div>
+
+        <div id="message" class="message"></div>
+      </section>
+
+      <section class="card panel">
+        <h2>문항 배점표</h2>
+
+        <div class="results">
+          <div class="box"><div class="box-head">선택형 상</div><ul class="score-list" id="mcHighList"></ul></div>
+          <div class="box"><div class="box-head">서답형 상</div><ul class="score-list" id="saHighList"></ul></div>
+          <div class="box"><div class="box-head">선택형 중</div><ul class="score-list" id="mcMidList"></ul></div>
+          <div class="box"><div class="box-head">서답형 중</div><ul class="score-list" id="saMidList"></ul></div>
+          <div class="box"><div class="box-head">선택형 하</div><ul class="score-list" id="mcLowList"></ul></div>
+          <div class="box"><div class="box-head">서답형 하</div><ul class="score-list" id="saLowList"></ul></div>
+        </div>
+
+        <div class="summary">
+          <div class="summary-card"><div class="small">선택형 총점</div><div class="big" id="sumMC">0</div></div>
+          <div class="summary-card"><div class="small">서답형 총점</div><div class="big" id="sumSA">0</div></div>
+          <div class="summary-card"><div class="small">전체 총점</div><div class="big" id="sumAll">0</div></div>
+        </div>
+
+        <div class="download-wrap">
+          <h2 style="margin-bottom:12px">내려받기</h2>
+          <button class="btn-download" id="downloadBtn">XLSX 파일로 내려받기</button>
+        </div>
+      </section>
+    </div>
+  </div><!-- /basicMode -->
+
 </div>
 
 <script>
 (() => {
+  /* ══════════════════════════════════════════
+     유틸
+  ══════════════════════════════════════════ */
   const $ = id => document.getElementById(id);
-
-  const numericIds = [
-    "mcCount","saCount","mcHCnt","saHCnt","mcMCnt","saMCnt","mcLCnt","saLCnt",
-    "mcScore","saScore","mcHScore","saHScore","mcMScore","saMScore","mcLScore","saLScore"
-  ];
-
-  const defaults = {};
-  numericIds.forEach(id => defaults[id] = $(id).value);
-
-  let lastResult = null;
-
-  function n(id){
-    const v = parseInt($(id).value, 10);
-    return Number.isFinite(v) ? v : 0;
-  }
-
-  function fmtPercent(value){
-    return `${Math.round(value * 100)}%`;
-  }
-
-  function fmtOne(value){
-    return (Math.round(value * 10) / 10).toFixed(1);
-  }
-
-  function sum(arr){
-    return (arr || []).reduce((a,b) => a + b, 0);
-  }
-
+  function n(id){ const v=parseInt($(id).value,10); return Number.isFinite(v)?v:0; }
+  function fmtPercent(v){ return `${Math.round(v*100)}%`; }
+  function fmtOne(v){ return (Math.round(v*10)/10).toFixed(1); }
+  function sum(arr){ return (arr||[]).reduce((a,b)=>a+b,0); }
   function minVal(arr){ return Math.min(...arr); }
   function maxVal(arr){ return Math.max(...arr); }
-  function arrayHasData(arr){ return Array.isArray(arr) && arr.length > 0; }
-  function allSame(arr){ return arr.every(v => v === arr[0]); }
-  function randInt(a,b){ return Math.floor(Math.random() * (b-a+1)) + a; }
-
-  function sortDesc(arr){
-    return arr.slice().sort((a,b)=>b-a);
-  }
-
+  function arrayHasData(arr){ return Array.isArray(arr)&&arr.length>0; }
+  function allSame(arr){ return arr.every(v=>v===arr[0]); }
+  function randInt(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+  function sortDesc(arr){ return arr.slice().sort((a,b)=>b-a); }
   function shuffle(arr){
-    const a = arr.slice();
-    for(let i=a.length-1; i>0; i--){
-      const j = randInt(0,i);
-      [a[i], a[j]] = [a[j], a[i]];
-    }
+    const a=arr.slice();
+    for(let i=a.length-1;i>0;i--){ const j=randInt(0,i);[a[i],a[j]]=[a[j],a[i]]; }
     return a;
   }
+  function safeAvg(t,c){ return c>0?t/c:0; }
 
-  function showMessage(text, type){
-    const box = $("message");
-    box.className = `message ${type}`;
-    box.textContent = text;
-  }
+  /* ══════════════════════════════════════════
+     모드 전환
+  ══════════════════════════════════════════ */
+  window.switchMode = function(mode){
+    $('easyMode').style.display  = mode==='easy'  ? '' : 'none';
+    $('basicMode').style.display = mode==='basic' ? '' : 'none';
+    $('tabEasy').classList.toggle('active', mode==='easy');
+    $('tabBasic').classList.toggle('active', mode==='basic');
+    if(mode==='basic') updateAutoFields();
+  };
 
-  function clearMessage(){
-    const box = $("message");
-    box.className = "message";
-    box.textContent = "";
-  }
-
-  function safeAvg(total, cnt){
-    return cnt > 0 ? total / cnt : 0;
-  }
-
-  function updateAutoFields(){
-    const mcCount = n("mcCount"), saCount = n("saCount");
-    const mcHCnt = n("mcHCnt"), saHCnt = n("saHCnt");
-    const mcMCnt = n("mcMCnt"), saMCnt = n("saMCnt");
-    const mcLCnt = n("mcLCnt"), saLCnt = n("saLCnt");
-
-    const mcScore = n("mcScore"), saScore = n("saScore");
-    const mcHScore = n("mcHScore"), saHScore = n("saHScore");
-    const mcMScore = n("mcMScore"), saMScore = n("saMScore");
-    const mcLScore = n("mcLScore"), saLScore = n("saLScore");
-
-    const totalCnt = mcCount + saCount;
-    const totalScore = mcScore + saScore;
-
-    $("mcCntSum").textContent = mcHCnt + mcMCnt + mcLCnt;
-    $("saCntSum").textContent = saHCnt + saMCnt + saLCnt;
-    $("mcScoreSum").textContent = mcHScore + mcMScore + mcLScore;
-    $("saScoreSum").textContent = saHScore + saMScore + saLScore;
-
-    $("ratioCntH").textContent = totalCnt > 0 ? fmtPercent((mcHCnt + saHCnt) / totalCnt) : "";
-    $("ratioCntM").textContent = totalCnt > 0 ? fmtPercent((mcMCnt + saMCnt) / totalCnt) : "";
-    $("ratioCntL").textContent = totalCnt > 0 ? fmtPercent((mcLCnt + saLCnt) / totalCnt) : "";
-    $("ratioCntSum").textContent = totalCnt > 0 ? "100%" : "";
-
-    $("ratioScoreH").textContent = totalScore > 0 ? fmtPercent((mcHScore + saHScore) / totalScore) : "";
-    $("ratioScoreM").textContent = totalScore > 0 ? fmtPercent((mcMScore + saMScore) / totalScore) : "";
-    $("ratioScoreL").textContent = totalScore > 0 ? fmtPercent((mcLScore + saLScore) / totalScore) : "";
-    $("ratioScoreSum").textContent = totalScore > 0 ? "100%" : "";
-  }
-
-  function validateInput(){
-    updateAutoFields();
-    const msgs = [];
-
-    const mcCount = n("mcCount"), saCount = n("saCount");
-    const mcHCnt = n("mcHCnt"), saHCnt = n("saHCnt");
-    const mcMCnt = n("mcMCnt"), saMCnt = n("saMCnt");
-    const mcLCnt = n("mcLCnt"), saLCnt = n("saLCnt");
-
-    const mcScore = n("mcScore"), saScore = n("saScore");
-    const mcHScore = n("mcHScore"), saHScore = n("saHScore");
-    const mcMScore = n("mcMScore"), saMScore = n("saMScore");
-    const mcLScore = n("mcLScore"), saLScore = n("saLScore");
-
-    if (mcHCnt + mcMCnt + mcLCnt !== mcCount) msgs.push("- 선택형 상/중/하 문항개수의 합이 선택형 문항개수와 다릅니다.");
-    if (saHCnt + saMCnt + saLCnt !== saCount) msgs.push("- 서답형 상/중/하 문항개수의 합이 서답형 문항개수와 다릅니다.");
-
-    if (mcHScore + mcMScore + mcLScore !== mcScore) msgs.push("- 선택형 상/중/하 점수의 합이 선택형 문항점수와 다릅니다.");
-    if (saHScore + saMScore + saLScore !== saScore) msgs.push("- 서답형 상/중/하 점수의 합이 서답형 문항점수와 다릅니다.");
-
-    if (mcHCnt > 0 && mcHScore * 10 < mcHCnt) msgs.push("- 선택형 상: 최소 0.1점씩도 줄 수 없습니다.");
-    if (mcMCnt > 0 && mcMScore * 10 < mcMCnt) msgs.push("- 선택형 중: 최소 0.1점씩도 줄 수 없습니다.");
-    if (mcLCnt > 0 && mcLScore * 10 < mcLCnt) msgs.push("- 선택형 하: 최소 0.1점씩도 줄 수 없습니다.");
-
-    if (saHCnt > 0 && saHScore < saHCnt) msgs.push("- 서답형 상: 최소 1점씩도 줄 수 없습니다.");
-    if (saMCnt > 0 && saMScore < saMCnt) msgs.push("- 서답형 중: 최소 1점씩도 줄 수 없습니다.");
-    if (saLCnt > 0 && saLScore < saLCnt) msgs.push("- 서답형 하: 최소 1점씩도 줄 수 없습니다.");
-
-    return msgs;
-  }
-
-  function checkMCBoundary(arrH, arrM, arrL){
-    if (arrayHasData(arrH) && arrayHasData(arrM) && maxVal(arrM) > minVal(arrH)) return false;
-    if (arrayHasData(arrM) && arrayHasData(arrL) && maxVal(arrL) > minVal(arrM)) return false;
+  /* ══════════════════════════════════════════
+     공통 배점 생성 로직
+  ══════════════════════════════════════════ */
+  function checkMCBoundary(arrH,arrM,arrL){
+    if(arrayHasData(arrH)&&arrayHasData(arrM)&&maxVal(arrM)>minVal(arrH)) return false;
+    if(arrayHasData(arrM)&&arrayHasData(arrL)&&maxVal(arrL)>minVal(arrM)) return false;
     return true;
   }
-
-  function checkSABoundary(arrH, arrM, arrL){
-    if (arrayHasData(arrH) && arrayHasData(arrM) && minVal(arrH) <= maxVal(arrM)) return false;
-    if (arrayHasData(arrM) && arrayHasData(arrL) && minVal(arrM) <= maxVal(arrL)) return false;
+  function checkSABoundary(arrH,arrM,arrL){
+    if(arrayHasData(arrH)&&arrayHasData(arrM)&&minVal(arrH)<=maxVal(arrM)) return false;
+    if(arrayHasData(arrM)&&arrayHasData(arrL)&&minVal(arrM)<=maxVal(arrL)) return false;
     return true;
   }
-
   function checkMCInternalSpread(arr){
-    if (!arrayHasData(arr)) return true;
-    return (maxVal(arr) - minVal(arr) <= 10);
+    if(!arrayHasData(arr)) return true;
+    return (maxVal(arr)-minVal(arr)<=10);
   }
 
-  function buildRandomPartition(n, total, lowBound, highBound){
-    if (n === 0) return total === 0 ? [] : null;
-    if (total < n * lowBound || total > n * highBound) return null;
-
-    const arr = [];
-    let remain = total;
-
-    for(let i=1; i<=n; i++){
-      const vMin = Math.max(lowBound, remain - (n-i) * highBound);
-      const vMax = Math.min(highBound, remain - (n-i) * lowBound);
-      if (vMin > vMax) return null;
-      const v = randInt(vMin, vMax);
-      arr.push(v);
-      remain -= v;
+  function buildRandomPartition(n,total,lowBound,highBound){
+    if(n===0) return total===0?[]:null;
+    if(total<n*lowBound||total>n*highBound) return null;
+    const arr=[]; let remain=total;
+    for(let i=1;i<=n;i++){
+      const vMin=Math.max(lowBound,remain-(n-i)*highBound);
+      const vMax=Math.min(highBound,remain-(n-i)*lowBound);
+      if(vMin>vMax) return null;
+      const v=randInt(vMin,vMax);
+      arr.push(v); remain-=v;
     }
-    return remain === 0 ? shuffle(arr) : null;
+    return remain===0?shuffle(arr):null;
   }
 
-  function buildRandomPartitionMC(n, total, preferVariation=true){
-    if (n === 0) return total === 0 ? [] : null;
-    if (total < n) return null;
-
-    const arr = new Array(n).fill(Math.floor(total / n));
-    let remain = total % n;
-    for(let i=0; i<remain; i++) arr[i] += 1;
-
-    if (preferVariation && n >= 2){
-      for(let t=0; t<100; t++){
-        const i = randInt(0, n-1);
-        const j = randInt(0, n-1);
-        if (i !== j && arr[i] >= 2){
-          arr[i] -= 1;
-          arr[j] += 1;
-          if (maxVal(arr) - minVal(arr) > 10){
-            arr[i] += 1;
-            arr[j] -= 1;
-          }
-        }
+  function buildRandomPartitionMC(cnt,total){
+    if(cnt===0) return total===0?[]:null;
+    if(total<cnt) return null;
+    const arr=new Array(cnt).fill(Math.floor(total/cnt));
+    let rem=total%cnt;
+    for(let i=0;i<rem;i++) arr[i]+=1;
+    for(let t=0;t<100;t++){
+      const i=randInt(0,cnt-1), j=randInt(0,cnt-1);
+      if(i!==j&&arr[i]>=2){ arr[i]-=1; arr[j]+=1; if(maxVal(arr)-minVal(arr)>10){arr[i]+=1;arr[j]-=1;} }
+    }
+    let mixed=shuffle(arr);
+    if(!checkMCInternalSpread(mixed)) return null;
+    if(allSame(mixed)&&cnt>=2){
+      for(let i=0;i<cnt;i++) for(let j=0;j<cnt;j++){
+        if(i!==j&&mixed[i]>=2){ mixed[i]-=1; mixed[j]+=1;
+          if(checkMCInternalSpread(mixed)&&!allSame(mixed)) return mixed;
+          mixed[i]+=1; mixed[j]-=1; }
       }
     }
-
-    let mixed = shuffle(arr);
-    if (!checkMCInternalSpread(mixed)) return null;
-
-    if (preferVariation && allSame(mixed) && n >= 2){
-      for(let i=0; i<n; i++){
-        for(let j=0; j<n; j++){
-          if (i !== j && mixed[i] >= 2){
-            mixed[i] -= 1;
-            mixed[j] += 1;
-            if (checkMCInternalSpread(mixed) && !allSame(mixed)) return mixed;
-            mixed[i] += 1;
-            mixed[j] -= 1;
-          }
-        }
-      }
-    }
-
     return mixed;
   }
 
-  function generateMultipleChoice(){
-    const nH = n("mcHCnt"), nM = n("mcMCnt"), nL = n("mcLCnt");
-    const sH = n("mcHScore") * 10, sM = n("mcMScore") * 10, sL = n("mcLScore") * 10;
-
-    const avgH = safeAvg(sH, nH) / 10;
-    const avgM = safeAvg(sM, nM) / 10;
-    const avgL = safeAvg(sL, nL) / 10;
-
-    for(let tries=0; tries<8000; tries++){
-      const arrL = buildRandomPartitionMC(nL, sL, true);
-      const arrM = buildRandomPartitionMC(nM, sM, true);
-      const arrH = buildRandomPartitionMC(nH, sH, true);
-
-      if (arrL === null || arrM === null || arrH === null) continue;
-      if (!checkMCInternalSpread(arrL) || !checkMCInternalSpread(arrM) || !checkMCInternalSpread(arrH)) continue;
-      if (checkMCBoundary(arrH, arrM, arrL)){
-        return { ok:true, arrH:sortDesc(arrH), arrM:sortDesc(arrM), arrL:sortDesc(arrL) };
-      }
+  function generateMultipleChoiceWith(nH,nM,nL,sH10,sM10,sL10){
+    for(let t=0;t<8000;t++){
+      const aL=buildRandomPartitionMC(nL,sL10);
+      const aM=buildRandomPartitionMC(nM,sM10);
+      const aH=buildRandomPartitionMC(nH,sH10);
+      if(!aL||!aM||!aH) continue;
+      if(!checkMCInternalSpread(aL)||!checkMCInternalSpread(aM)||!checkMCInternalSpread(aH)) continue;
+      if(checkMCBoundary(aH,aM,aL)) return {ok:true,arrH:sortDesc(aH),arrM:sortDesc(aM),arrL:sortDesc(aL)};
     }
-
-    return {
-      ok:false,
-      reason:
-`선택형 배점 생성에 실패했습니다.
-- 같은 난이도 안에서 최고점과 최저점의 차이를 1.0점 이내로 유지해야 합니다.
-- 동시에 상/중/하 경계 조건도 만족해야 합니다.
-- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
-      solution:
-`1) 선택형 상 점수를 늘리세요.
-2) 선택형 중 또는 하 점수를 낮추세요.
-3) 같은 난이도 내 문항 수를 줄이면 분배가 쉬워집니다.
-4) 소수점 차이를 만들 수 있도록 0.1 단위 여유가 있는지 확인하세요.`
-    };
+    return {ok:false};
   }
 
-  function generateShortAnswer(){
-    const nH = n("saHCnt"), nM = n("saMCnt"), nL = n("saLCnt");
-    const sH = n("saHScore"), sM = n("saMScore"), sL = n("saLScore");
-
-    const avgH = safeAvg(sH, nH);
-    const avgM = safeAvg(sM, nM);
-    const avgL = safeAvg(sL, nL);
-
-    let feasible = false, a = 1, b = 2;
-
+  function generateShortAnswerWith(nH,nM,nL,sH,sM,sL){
+    let feasible=false, a=1, b=2;
     outer:
-    for(a=1; a<=1000; a++){
-      if (nL > 0 && (sL < nL || sL > nL * a)) continue;
-      for(b=a+1; b<=1000; b++){
-        if (nM > 0 && (sM < nM*(a+1) || sM > nM*b)) continue;
-        if (nH > 0 && sH < nH*(b+1)) continue;
-        feasible = true;
-        break outer;
+    for(a=1;a<=1000;a++){
+      if(nL>0&&(sL<nL||sL>nL*a)) continue;
+      for(b=a+1;b<=1000;b++){
+        if(nM>0&&(sM<nM*(a+1)||sM>nM*b)) continue;
+        if(nH>0&&sH<nH*(b+1)) continue;
+        feasible=true; break outer;
       }
     }
-
-    if (!feasible){
-      return {
-        ok:false,
-        reason:
-`서답형 배점 생성에 실패했습니다.
-- 난이도 간 점수 구간을 엄격히 분리할 수 없는 구조입니다.
-- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
-        solution:
-`1) 서답형 상 점수를 늘리세요.
-2) 서답형 중 점수를 낮추세요.
-3) 서답형 하 점수를 더 낮추세요.
-4) 각 난이도 문항 수를 조정하세요.`
-      };
+    if(!feasible) return {ok:false};
+    for(let t=0;t<5000;t++){
+      const aL=buildRandomPartition(nL,sL,1,a);
+      const aM=buildRandomPartition(nM,sM,a+1,b);
+      const aH=buildRandomPartition(nH,sH,b+1,Math.max(sH,b+1));
+      if(!aL||!aM||!aH) continue;
+      if(checkSABoundary(aH,aM,aL)) return {ok:true,arrH:sortDesc(aH),arrM:sortDesc(aM),arrL:sortDesc(aL)};
     }
-
-    for(let tries=0; tries<5000; tries++){
-      const arrL = buildRandomPartition(nL, sL, 1, a);
-      const arrM = buildRandomPartition(nM, sM, a+1, b);
-      const arrH = buildRandomPartition(nH, sH, b+1, Math.max(sH, b+1));
-
-      if (arrL === null || arrM === null || arrH === null) continue;
-      if (checkSABoundary(arrH, arrM, arrL)){
-        return { ok:true, arrH:sortDesc(arrH), arrM:sortDesc(arrM), arrL:sortDesc(arrL) };
-      }
-    }
-
-    return {
-      ok:false,
-      reason:
-`서답형 배점 생성에 실패했습니다.
-- 난이도 경계 조건을 만족하는 자연수 조합을 찾지 못했습니다.
-- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
-      solution:
-`1) 서답형 상 점수를 늘리세요.
-2) 서답형 중 점수를 낮추세요.
-3) 서답형 하 점수를 더 낮추세요.
-4) 각 난이도 문항 수를 조정하세요.`
-    };
+    return {ok:false};
   }
 
-  function renderList(elId, arr, isDecimal){
-    const ul = $(elId);
-    ul.innerHTML = "";
-    if (!arrayHasData(arr)){
-      ul.innerHTML = `<li class="score-item"><span class="idx">-</span><span class="val">없음</span></li>`;
-      return;
-    }
-    arr.forEach((v, i) => {
-      const li = document.createElement("li");
-      li.className = "score-item";
-      li.innerHTML = `<span class="idx">${i+1}번</span><span class="val">${isDecimal ? fmtOne(v / 10) : String(v)}</span>`;
+  /* ══════════════════════════════════════════
+     공통 렌더링
+  ══════════════════════════════════════════ */
+  function renderList(elId,arr,isDecimal){
+    const ul=$(elId); ul.innerHTML='';
+    if(!arrayHasData(arr)){ ul.innerHTML=`<li class="score-item"><span class="idx">-</span><span class="val">없음</span></li>`; return; }
+    arr.forEach((v,i)=>{
+      const li=document.createElement('li'); li.className='score-item';
+      li.innerHTML=`<span class="idx">${i+1}번</span><span class="val">${isDecimal?fmtOne(v/10):String(v)}</span>`;
       ul.appendChild(li);
     });
   }
 
-  function renderResults(result){
-    renderList("mcHighList", result.mcHigh, true);
-    renderList("mcMidList", result.mcMid, true);
-    renderList("mcLowList", result.mcLow, true);
-    renderList("saHighList", result.saHigh, false);
-    renderList("saMidList", result.saMid, false);
-    renderList("saLowList", result.saLow, false);
+  /* ══════════════════════════════════════════
+     ⚡ 간편모드
+  ══════════════════════════════════════════ */
+  let easyRatioMode=0;
+  let easyLastResult=null;
+  let easyLastParams=null;
 
-    const mcSum = (sum(result.mcHigh) + sum(result.mcMid) + sum(result.mcLow)) / 10;
-    const saSum = sum(result.saHigh) + sum(result.saMid) + sum(result.saLow);
-
-    $("sumMC").textContent = fmtOne(mcSum);
-    $("sumSA").textContent = String(saSum);
-    $("sumAll").textContent = fmtOne(mcSum + saSum);
+  /* ─ 진행 표시줄 업데이트 ─ */
+  function updateProgress(current){
+    for(let s=1;s<=4;s++){
+      const item=$(`sp${s}`);
+      if(!item) continue;
+      item.classList.toggle('active', s===current);
+      item.classList.toggle('done',   s<current);
+    }
+    // 연결선 (1~3개)
+    document.querySelectorAll('.sp-line').forEach((line,i)=>{
+      line.classList.toggle('done', i+2 <= current);
+    });
   }
 
-  function clearResults(){
-    ["mcHighList","mcMidList","mcLowList","saHighList","saMidList","saLowList"].forEach(id => $(id).innerHTML = "");
-    $("sumMC").textContent = "0";
-    $("sumSA").textContent = "0";
-    $("sumAll").textContent = "0";
+  /* ─ 단계 전환 ─ */
+  window.showEasyStep = function(step){
+    [1,2,3,4].forEach(s=>{
+      const el=$(`easyStep${s}`);
+      el.classList.toggle('active', s===step);
+    });
+    updateProgress(step);
+    // 각 단계 첫 입력칸에 포커스
+    const focusMap={1:'easyTotal', 2:'easyTotalScore', 3:'ratioH'};
+    if(focusMap[step]) setTimeout(()=>$(focusMap[step]).focus(), 100);
+  };
+
+  /* ─ STEP 1: 문항 수 ─ */
+  window.easyStep1Next = function(){
+    const total=parseInt($('easyTotal').value,10);
+    const msg=$('easyStep1Msg');
+    msg.className='message'; msg.style.display='none';
+    if(!total||total<2||total>200){
+      msg.className='message error'; msg.style.display='block';
+      msg.textContent='문항 수는 2~200 사이로 입력해 주세요.'; return;
+    }
+    showEasyStep(2);
+  };
+
+  /* ─ STEP 2: 총점 자동 분배 & 수동 입력 ─ */
+  window.easyAutoDistScore = function(){
+    const total=parseInt($('easyTotalScore').value,10);
+    if(!total||total<1){
+      $('easyMcScore').value=''; $('easySaScore').value='';
+      updateEasyScoreSum(); return;
+    }
+    const mc=Math.round(total*0.7);
+    $('easyMcScore').value=mc;
+    $('easySaScore').value=total-mc;
+    updateEasyScoreSum();
+  };
+
+  window.easyScoreChanged = function(){
+    const mc=parseInt($('easyMcScore').value,10)||0;
+    const sa=parseInt($('easySaScore').value,10)||0;
+    if(mc>0&&sa>0) $('easyTotalScore').value=mc+sa;
+    updateEasyScoreSum();
+  };
+
+  function updateEasyScoreSum(){
+    const mc=parseInt($('easyMcScore').value,10)||0;
+    const sa=parseInt($('easySaScore').value,10)||0;
+    const el=$('easyScoreSum');
+    const target=parseInt($('easyTotalScore').value,10)||0;
+    if(!mc&&!sa){ el.textContent='—'; el.className='s2-sum-val'; return; }
+    el.textContent=(mc+sa)+'점';
+    el.className='s2-sum-val '+(target>0 ? (mc+sa===target?'ok':'ng') : 'ok');
+  }
+
+  window.easyStep2Next = function(){
+    const mc=parseInt($('easyMcScore').value,10);
+    const sa=parseInt($('easySaScore').value,10);
+    const msg=$('easyStep2Msg');
+    msg.className='message'; msg.style.display='none';
+    if(isNaN(mc)||mc<1){
+      msg.className='message error'; msg.style.display='block';
+      msg.textContent='선택형 점수를 1 이상으로 입력해 주세요.'; return;
+    }
+    if(isNaN(sa)||sa<1){
+      msg.className='message error'; msg.style.display='block';
+      msg.textContent='서답형 점수를 1 이상으로 입력해 주세요.'; return;
+    }
+    showEasyStep(3);
+    updateRatioTotal();
+  };
+
+  /* ─ STEP 3: 비율 ─ */
+  window.selectRatioMode = function(m){
+    easyRatioMode=m;
+    $('rmCard0').classList.toggle('selected',m===0);
+    $('rmCard1').classList.toggle('selected',m===1);
+  };
+
+  window.updateRatioTotal = function(){
+    const h=parseFloat($('ratioH').value)||0;
+    const m=parseFloat($('ratioM').value)||0;
+    const l=parseFloat($('ratioL').value)||0;
+    const t=h+m+l;
+    const el=$('ratioTotal');
+    el.textContent=`합계: ${Math.round(t)}%`;
+    el.className='ratio-total '+(Math.abs(t-100)<0.5?'ok':'ng');
+  };
+
+  window.easyStep3Next = function(){
+    easyGenerate();
+  };
+
+  window.easyRegenerate = function(){
+    easyGenerate();
+  };
+
+  /* ─ 핵심 생성 함수 ─ */
+  function easyGenerate(){
+    const total=parseInt($('easyTotal').value,10)||0;
+    const inputMcScore=parseInt($('easyMcScore').value,10)||0;
+    const inputSaScore=parseInt($('easySaScore').value,10)||0;
+    const rH=parseFloat($('ratioH').value)||0;
+    const rM=parseFloat($('ratioM').value)||0;
+    const rL=parseFloat($('ratioL').value)||0;
+    const msg=$('easyStep3Msg');
+
+    if(Math.abs(rH+rM+rL-100)>0.5){
+      msg.className='message error'; msg.style.display='block';
+      msg.textContent='상/중/하 비율 합계가 100%여야 합니다.'; return;
+    }
+    msg.style.display='none';
+
+    const SLACK=0.04;
+    let params=null;
+    for(let attempt=0;attempt<300;attempt++){
+      const jH=rH/100+(Math.random()*2-1)*SLACK;
+      const jM=rM/100+(Math.random()*2-1)*SLACK;
+      const jL=rL/100+(Math.random()*2-1)*SLACK;
+      if(jH<=0||jM<=0||jL<=0) continue;
+      const p=easyRatioMode===0
+        ? computeParamsFromCntRatio(total,jH,jM,jL,inputMcScore,inputSaScore)
+        : computeParamsFromScoreRatio(total,jH,jM,jL,inputMcScore,inputSaScore);
+      if(p){ params=p; break; }
+    }
+
+    if(!params){
+      msg.className='message error'; msg.style.display='block';
+      msg.textContent='입력한 비율로 조건을 만족하는 배점을 찾지 못했습니다.\n비율을 조금 바꿔보거나 문항 수를 조정해 보세요.';
+      return;
+    }
+
+    const mc=generateMultipleChoiceWith(params.mcH,params.mcM,params.mcL,params.mcHScore*10,params.mcMScore*10,params.mcLScore*10);
+    const sa=generateShortAnswerWith(params.saH,params.saM,params.saL,params.saHScore,params.saMScore,params.saLScore);
+
+    if(!mc.ok||!sa.ok){
+      msg.className='message error'; msg.style.display='block';
+      msg.textContent='배점 생성에 실패했습니다. 다시 생성해 보세요.'; return;
+    }
+
+    easyLastParams=params;
+    easyLastResult={mcHigh:mc.arrH,mcMid:mc.arrM,mcLow:mc.arrL,saHigh:sa.arrH,saMid:sa.arrM,saLow:sa.arrL};
+
+    renderEasyResult(params,easyLastResult,rH,rM,rL);
+    showEasyStep(4);
+  }
+
+  // 문항 수 기준으로 파라미터 계산
+  function computeParamsFromCntRatio(total,jH,jM,jL,inputMcScore,inputSaScore){
+    const mcRatio=0.65+Math.random()*0.15;
+    let mcCount=Math.round(total*mcRatio);
+    let saCount=total-mcCount;
+    if(mcCount<1||saCount<1) return null;
+
+    const mcH=Math.max(1,Math.round(mcCount*jH));
+    const mcM=Math.max(1,Math.round(mcCount*jM));
+    let mcL=mcCount-mcH-mcM; if(mcL<0) return null;
+
+    const saH=Math.max(1,Math.round(saCount*jH));
+    const saM=Math.max(1,Math.round(saCount*jM));
+    let saL=saCount-saH-saM; if(saL<0) saL=0;
+    if(saL<0) return null;
+
+    // 사용자 입력 점수 사용
+    const mcScore=inputMcScore||Math.round(100*(mcCount/total));
+    const saScore=inputSaScore||(100-mcScore);
+
+    return buildScoreParams(mcCount,saCount,mcH,mcM,mcL,saH,saM,saL,mcScore,saScore,jH,jM,jL);
+  }
+
+  // 점수 합 기준으로 파라미터 계산
+  function computeParamsFromScoreRatio(total,jH,jM,jL,inputMcScore,inputSaScore){
+    const mcRatio=0.65+Math.random()*0.15;
+    let mcCount=Math.round(total*mcRatio);
+    let saCount=total-mcCount;
+    if(mcCount<1||saCount<1) return null;
+
+    // 문항 수는 균등 분배
+    const mcH=Math.max(1,Math.round(mcCount*0.25));
+    const mcM=Math.max(1,Math.round(mcCount*0.5));
+    let mcL=mcCount-mcH-mcM; if(mcL<0) return null;
+
+    const saH=Math.max(1,Math.round(saCount*0.33));
+    const saM=Math.max(1,Math.round(saCount*0.5));
+    let saL=saCount-saH-saM; if(saL<0) saL=0;
+
+    // 사용자 입력 점수 사용
+    const mcScore=inputMcScore||Math.round(100*(mcCount/total));
+    const saScore=inputSaScore||(100-mcScore);
+
+    // 점수 비율 기준으로 상/중/하 점수 배분
+    return buildScoreParams(mcCount,saCount,mcH,mcM,mcL,saH,saM,saL,mcScore,saScore,jH,jM,jL);
+  }
+
+  function buildScoreParams(mcCount,saCount,mcH,mcM,mcL,saH,saM,saL,mcScore,saScore,jH,jM,jL){
+    // 점수 비율 기준 배분 (상>중>하 보장)
+    const mcHScore=Math.max(mcH, Math.round(mcScore*jH));
+    const mcLScore=Math.max(mcL, Math.round(mcScore*jL));
+    const mcMScore=mcScore-mcHScore-mcLScore;
+    if(mcMScore<mcM) return null;
+    if(mcHScore<mcH||mcLScore<mcL) return null;
+
+    const saHScore=Math.max(saH, Math.round(saScore*jH));
+    const saLScore=Math.max(saL, Math.round(saScore*jL));
+    const saMScore=saScore-saHScore-saLScore;
+    if(saMScore<saM) return null;
+
+    // 경계 평균 검증: avg(상) > avg(중) > avg(하)
+    if(mcH>0&&mcM>0&&(mcHScore/mcH)<=(mcMScore/mcM)) return null;
+    if(mcM>0&&mcL>0&&(mcMScore/mcM)<=(mcLScore/mcL)) return null;
+    if(saH>0&&saM>0&&(saHScore/saH)<=(saMScore/saM)) return null;
+    if(saM>0&&saL>0&&(saMScore/saM)<=(saLScore/saL)) return null;
+
+    return {mcCount,saCount,mcH,mcM,mcL,saH,saM,saL,mcScore,saScore,mcHScore,mcMScore,mcLScore,saHScore,saMScore,saLScore};
+  }
+
+  function renderEasyResult(p,result,rH,rM,rL){
+    // 정보 요약
+    const actualCntH=p.mcH+p.saH, actualCntM=p.mcM+p.saM, actualCntL=p.mcL+p.saL;
+    const total=p.mcCount+p.saCount;
+    const aH=Math.round(actualCntH/total*100);
+    const aM=Math.round(actualCntM/total*100);
+    const aL=Math.round(actualCntL/total*100);
+
+    $('easyResultInfo').innerHTML=
+      `<strong>총 ${total}문항</strong> (선택형 ${p.mcCount}문항 · 서답형 ${p.saCount}문항) · 총점 ${p.mcScore+p.saScore}점<br>` +
+      `난이도 비율 — 상 <strong>${aH}%</strong> · 중 <strong>${aM}%</strong> · 하 <strong>${aL}%</strong>` +
+      ` <span style="color:var(--muted);font-size:12px">(목표: 상${Math.round(rH)}% 중${Math.round(rM)}% 하${Math.round(rL)}%)</span>`;
+
+    // 칩
+    $('easyChips').innerHTML=
+      `<span class="chip">선택형 상/중/하: ${p.mcH}/${p.mcM}/${p.mcL}문항</span>` +
+      `<span class="chip">서답형 상/중/하: ${p.saH}/${p.saM}/${p.saL}문항</span>` +
+      `<span class="chip">선택형 ${p.mcScore}점 · 서답형 ${p.saScore}점</span>`;
+
+    // 6개 박스 동적 생성
+    const boxes=[
+      {id:'e_mcH', title:'선택형 상', arr:result.mcHigh, dec:true},
+      {id:'e_saH', title:'서답형 상', arr:result.saHigh, dec:false},
+      {id:'e_mcM', title:'선택형 중', arr:result.mcMid,  dec:true},
+      {id:'e_saM', title:'서답형 중', arr:result.saMid,  dec:false},
+      {id:'e_mcL', title:'선택형 하', arr:result.mcLow,  dec:true},
+      {id:'e_saL', title:'서답형 하', arr:result.saLow,  dec:false},
+    ];
+    $('easyResults').innerHTML=boxes.map(b=>
+      `<div class="box"><div class="box-head">${b.title}</div><ul class="score-list" id="${b.id}"></ul></div>`
+    ).join('');
+    boxes.forEach(b=>renderList(b.id,b.arr,b.dec));
+
+    const mcSum=(sum(result.mcHigh)+sum(result.mcMid)+sum(result.mcLow))/10;
+    const saSum=sum(result.saHigh)+sum(result.saMid)+sum(result.saLow);
+    $('easySumMC').textContent=fmtOne(mcSum);
+    $('easySumSA').textContent=String(saSum);
+    $('easySumAll').textContent=fmtOne(mcSum+saSum);
+  }
+
+  // 기본모드로 수정 버튼
+  window.easyToBasic = function(){
+    if(!easyLastParams) return;
+    const p=easyLastParams;
+    // 기본모드 입력값 채우기
+    const set=(id,v)=>{ const el=$(id); if(el) el.value=v; };
+    set('mcCount',p.mcCount); set('saCount',p.saCount);
+    set('mcHCnt',p.mcH); set('mcMCnt',p.mcM); set('mcLCnt',p.mcL);
+    set('saHCnt',p.saH); set('saMCnt',p.saM); set('saLCnt',p.saL);
+    set('mcScore',p.mcScore); set('saScore',p.saScore);
+    set('mcHScore',p.mcHScore); set('mcMScore',p.mcMScore); set('mcLScore',p.mcLScore);
+    set('saHScore',p.saHScore); set('saMScore',p.saMScore); set('saLScore',p.saLScore);
+    switchMode('basic');
+    updateAutoFields();
+    // 기본모드에서 바로 결과도 렌더링
+    if(easyLastResult){
+      basicLastResult=easyLastResult;
+      renderBasicResults(basicLastResult);
+      showMessage('간편모드에서 생성된 배점이 불러와졌습니다.', 'success');
+    }
+  };
+
+  // 간편모드 XLSX 다운로드
+  window.easyDownload = function(){
+    if(!easyLastResult||!easyLastParams){
+      const m=$('easyStep4Msg');
+      m.className='message error'; m.style.display='block';
+      m.textContent='먼저 배점을 생성해 주세요.'; return;
+    }
+    downloadXlsxWith(easyLastParams, easyLastResult);
+  };
+
+  /* ══════════════════════════════════════════
+     ⚙️ 기본모드
+  ══════════════════════════════════════════ */
+  const numericIds=['mcCount','saCount','mcHCnt','saHCnt','mcMCnt','saMCnt','mcLCnt','saLCnt',
+    'mcScore','saScore','mcHScore','saHScore','mcMScore','saMScore','mcLScore','saLScore'];
+
+  const defaults={};
+  numericIds.forEach(id=>{ const el=$(id); if(el) defaults[id]=el.value; });
+
+  let basicLastResult=null;
+
+  function showMessage(text,type){
+    const box=$('message');
+    box.className=`message ${type}`; box.textContent=text;
+  }
+  function clearMessage(){
+    const box=$('message'); box.className='message'; box.textContent='';
+  }
+
+  function updateAutoFields(){
+    const mcCount=n('mcCount'),saCount=n('saCount');
+    const mcHCnt=n('mcHCnt'),saHCnt=n('saHCnt');
+    const mcMCnt=n('mcMCnt'),saMCnt=n('saMCnt');
+    const mcLCnt=n('mcLCnt'),saLCnt=n('saLCnt');
+    const mcScore=n('mcScore'),saScore=n('saScore');
+    const mcHScore=n('mcHScore'),saHScore=n('saHScore');
+    const mcMScore=n('mcMScore'),saMScore=n('saMScore');
+    const mcLScore=n('mcLScore'),saLScore=n('saLScore');
+    const totalCnt=mcCount+saCount, totalScore=mcScore+saScore;
+    $('mcCntSum').textContent=mcHCnt+mcMCnt+mcLCnt;
+    $('saCntSum').textContent=saHCnt+saMCnt+saLCnt;
+    $('mcScoreSum').textContent=mcHScore+mcMScore+mcLScore;
+    $('saScoreSum').textContent=saHScore+saMScore+saLScore;
+    $('ratioCntH').textContent=totalCnt>0?fmtPercent((mcHCnt+saHCnt)/totalCnt):'';
+    $('ratioCntM').textContent=totalCnt>0?fmtPercent((mcMCnt+saMCnt)/totalCnt):'';
+    $('ratioCntL').textContent=totalCnt>0?fmtPercent((mcLCnt+saLCnt)/totalCnt):'';
+    $('ratioCntSum').textContent=totalCnt>0?'100%':'';
+    $('ratioScoreH').textContent=totalScore>0?fmtPercent((mcHScore+saHScore)/totalScore):'';
+    $('ratioScoreM').textContent=totalScore>0?fmtPercent((mcMScore+saMScore)/totalScore):'';
+    $('ratioScoreL').textContent=totalScore>0?fmtPercent((mcLScore+saLScore)/totalScore):'';
+    $('ratioScoreSum').textContent=totalScore>0?'100%':'';
+  }
+
+  function validateInput(){
+    updateAutoFields();
+    const msgs=[];
+    const mcCount=n('mcCount'),saCount=n('saCount');
+    const mcHCnt=n('mcHCnt'),saHCnt=n('saHCnt'),mcMCnt=n('mcMCnt'),saMCnt=n('saMCnt'),mcLCnt=n('mcLCnt'),saLCnt=n('saLCnt');
+    const mcScore=n('mcScore'),saScore=n('saScore');
+    const mcHScore=n('mcHScore'),saHScore=n('saHScore'),mcMScore=n('mcMScore'),saMScore=n('saMScore'),mcLScore=n('mcLScore'),saLScore=n('saLScore');
+    if(mcHCnt+mcMCnt+mcLCnt!==mcCount) msgs.push('- 선택형 상/중/하 문항개수의 합이 선택형 문항개수와 다릅니다.');
+    if(saHCnt+saMCnt+saLCnt!==saCount) msgs.push('- 서답형 상/중/하 문항개수의 합이 서답형 문항개수와 다릅니다.');
+    if(mcHScore+mcMScore+mcLScore!==mcScore) msgs.push('- 선택형 상/중/하 점수의 합이 선택형 문항점수와 다릅니다.');
+    if(saHScore+saMScore+saLScore!==saScore) msgs.push('- 서답형 상/중/하 점수의 합이 서답형 문항점수와 다릅니다.');
+    if(mcHCnt>0&&mcHScore*10<mcHCnt) msgs.push('- 선택형 상: 최소 0.1점씩도 줄 수 없습니다.');
+    if(mcMCnt>0&&mcMScore*10<mcMCnt) msgs.push('- 선택형 중: 최소 0.1점씩도 줄 수 없습니다.');
+    if(mcLCnt>0&&mcLScore*10<mcLCnt) msgs.push('- 선택형 하: 최소 0.1점씩도 줄 수 없습니다.');
+    if(saHCnt>0&&saHScore<saHCnt) msgs.push('- 서답형 상: 최소 1점씩도 줄 수 없습니다.');
+    if(saMCnt>0&&saMScore<saMCnt) msgs.push('- 서답형 중: 최소 1점씩도 줄 수 없습니다.');
+    if(saLCnt>0&&saLScore<saLCnt) msgs.push('- 서답형 하: 최소 1점씩도 줄 수 없습니다.');
+    return msgs;
+  }
+
+  function generateMultipleChoice(){
+    const nH=n('mcHCnt'),nM=n('mcMCnt'),nL=n('mcLCnt');
+    const sH=n('mcHScore')*10,sM=n('mcMScore')*10,sL=n('mcLScore')*10;
+    const avgH=safeAvg(sH,nH)/10,avgM=safeAvg(sM,nM)/10,avgL=safeAvg(sL,nL)/10;
+    const res=generateMultipleChoiceWith(nH,nM,nL,sH,sM,sL);
+    if(!res.ok) return {ok:false,
+      reason:`선택형 배점 생성에 실패했습니다.\n- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
+      solution:`1) 선택형 상 점수를 늘리세요.\n2) 선택형 중 또는 하 점수를 낮추세요.`};
+    return res;
+  }
+
+  function generateShortAnswer(){
+    const nH=n('saHCnt'),nM=n('saMCnt'),nL=n('saLCnt');
+    const sH=n('saHScore'),sM=n('saMScore'),sL=n('saLScore');
+    const avgH=safeAvg(sH,nH),avgM=safeAvg(sM,nM),avgL=safeAvg(sL,nL);
+    const res=generateShortAnswerWith(nH,nM,nL,sH,sM,sL);
+    if(!res.ok) return {ok:false,
+      reason:`서답형 배점 생성에 실패했습니다.\n- 현재 평균: 상 ${avgH.toFixed(1)}점, 중 ${avgM.toFixed(1)}점, 하 ${avgL.toFixed(1)}점`,
+      solution:`1) 서답형 상 점수를 늘리세요.\n2) 서답형 중 점수를 낮추세요.`};
+    return res;
+  }
+
+  function renderBasicResults(result){
+    renderList('mcHighList',result.mcHigh,true);
+    renderList('mcMidList',result.mcMid,true);
+    renderList('mcLowList',result.mcLow,true);
+    renderList('saHighList',result.saHigh,false);
+    renderList('saMidList',result.saMid,false);
+    renderList('saLowList',result.saLow,false);
+    const mcSum=(sum(result.mcHigh)+sum(result.mcMid)+sum(result.mcLow))/10;
+    const saSum=sum(result.saHigh)+sum(result.saMid)+sum(result.saLow);
+    $('sumMC').textContent=fmtOne(mcSum);
+    $('sumSA').textContent=String(saSum);
+    $('sumAll').textContent=fmtOne(mcSum+saSum);
+  }
+
+  function clearBasicResults(){
+    ['mcHighList','mcMidList','mcLowList','saHighList','saMidList','saLowList'].forEach(id=>$(id).innerHTML='');
+    $('sumMC').textContent='0'; $('sumSA').textContent='0'; $('sumAll').textContent='0';
   }
 
   function generate(){
-    clearMessage();
-    updateAutoFields();
-
-    const errors = validateInput();
-    if (errors.length){
-      lastResult = null;
-      clearResults();
-      showMessage("오류 및 해결방법\n\n" + errors.join("\n"), "error");
-      return;
-    }
-
-    const mc = generateMultipleChoice();
-    if (!mc.ok){
-      lastResult = null;
-      clearResults();
-      showMessage(`오류 및 해결방법\n\n[실패 사유]\n${mc.reason}\n\n[해결 방법]\n${mc.solution}`, "error");
-      return;
-    }
-
-    const sa = generateShortAnswer();
-    if (!sa.ok){
-      lastResult = null;
-      clearResults();
-      showMessage(`오류 및 해결방법\n\n[실패 사유]\n${sa.reason}\n\n[해결 방법]\n${sa.solution}`, "error");
-      return;
-    }
-
-    lastResult = {
-      mcHigh: mc.arrH,
-      mcMid: mc.arrM,
-      mcLow: mc.arrL,
-      saHigh: sa.arrH,
-      saMid: sa.arrM,
-      saLow: sa.arrL
-    };
-
-    renderResults(lastResult);
-    showMessage("배점 생성이 완료되었습니다.", "success");
+    clearMessage(); updateAutoFields();
+    const errors=validateInput();
+    if(errors.length){ basicLastResult=null; clearBasicResults(); showMessage('오류 및 해결방법\n\n'+errors.join('\n'),'error'); return; }
+    const mc=generateMultipleChoice();
+    if(!mc.ok){ basicLastResult=null; clearBasicResults(); showMessage(`오류 및 해결방법\n\n[실패 사유]\n${mc.reason}\n\n[해결 방법]\n${mc.solution}`,'error'); return; }
+    const sa=generateShortAnswer();
+    if(!sa.ok){ basicLastResult=null; clearBasicResults(); showMessage(`오류 및 해결방법\n\n[실패 사유]\n${sa.reason}\n\n[해결 방법]\n${sa.solution}`,'error'); return; }
+    basicLastResult={mcHigh:mc.arrH,mcMid:mc.arrM,mcLow:mc.arrL,saHigh:sa.arrH,saMid:sa.arrM,saLow:sa.arrL};
+    renderBasicResults(basicLastResult);
+    showMessage('배점 생성이 완료되었습니다.','success');
   }
 
   function resetDefaults(){
-    numericIds.forEach(id => $(id).value = defaults[id]);
-    updateAutoFields();
-    clearMessage();
-    clearResults();
-    lastResult = null;
+    numericIds.forEach(id=>{ const el=$(id); if(el) el.value=defaults[id]; });
+    updateAutoFields(); clearMessage(); clearBasicResults(); basicLastResult=null;
   }
 
-  function escapeXml(s){
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
-  }
-  function colLetter(n){
-    let s = "";
-    while(n > 0){
-      const m = (n - 1) % 26;
-      s = String.fromCharCode(65 + m) + s;
-      n = Math.floor((n - 1) / 26);
+  /* ══════════════════════════════════════════
+     XLSX 다운로드 (공통)
+  ══════════════════════════════════════════ */
+  function escapeXml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;'); }
+  function colLetter(n){let s='';while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26);}return s;}
+  function sheetXmlFromCells(cells,merges=[]){
+    const rows=new Map(); let maxR=1,maxC=1;
+    for(const[addr,cell]of Object.entries(cells)){
+      const match=addr.match(/^([A-Z]+)(\d+)$/); if(!match) continue;
+      const row=parseInt(match[2],10); let col=0;
+      for(const ch of match[1]) col=col*26+ch.charCodeAt(0)-64;
+      maxR=Math.max(maxR,row); maxC=Math.max(maxC,col);
+      if(!rows.has(row)) rows.set(row,[]);
+      rows.get(row).push({addr,col,...cell});
     }
-    return s;
-  }
-  function sheetXmlFromCells(cells, merges=[]){
-    const rows = new Map();
-    let maxR = 1, maxC = 1;
-    for (const [addr, cell] of Object.entries(cells)){
-      const match = addr.match(/^([A-Z]+)(\d+)$/);
-      if (!match) continue;
-      const row = parseInt(match[2],10);
-      let col = 0;
-      for (const ch of match[1]) col = col * 26 + ch.charCodeAt(0) - 64;
-      maxR = Math.max(maxR, row);
-      maxC = Math.max(maxC, col);
-      if (!rows.has(row)) rows.set(row, []);
-      rows.get(row).push({addr, col, ...cell});
-    }
-    const rowXml = [];
-    Array.from(rows.keys()).sort((a,b)=>a-b).forEach(r => {
-      const cellsXml = rows.get(r).sort((a,b)=>a.col-b.col).map(c => {
-        if (c.type === "n") return `<c r="${c.addr}"><v>${c.value}</v></c>`;
-        return `<c r="${c.addr}" t="inlineStr"><is><t>${escapeXml(c.value ?? "")}</t></is></c>`;
-      }).join("");
+    const rowXml=[];
+    Array.from(rows.keys()).sort((a,b)=>a-b).forEach(r=>{
+      const cellsXml=rows.get(r).sort((a,b)=>a.col-b.col).map(c=>{
+        if(c.type==='n') return `<c r="${c.addr}"><v>${c.value}</v></c>`;
+        return `<c r="${c.addr}" t="inlineStr"><is><t>${escapeXml(c.value??'')}</t></is></c>`;
+      }).join('');
       rowXml.push(`<row r="${r}">${cellsXml}</row>`);
     });
-    const mergeXml = merges.length ? `<mergeCells count="${merges.length}">${merges.map(m=>`<mergeCell ref="${m}"/>`).join("")}</mergeCells>` : "";
+    const mergeXml=merges.length?`<mergeCells count="${merges.length}">${merges.map(m=>`<mergeCell ref="${m}"/>`).join('')}</mergeCells>`:'';
     return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
   <dimension ref="A1:${colLetter(maxC)}${maxR}"/>
   <sheetViews><sheetView workbookViewId="0"/></sheetViews>
   <sheetFormatPr defaultRowHeight="15"/>
-  <sheetData>${rowXml.join("")}</sheetData>
+  <sheetData>${rowXml.join('')}</sheetData>
   ${mergeXml}
 </worksheet>`;
   }
-  function makeWorkbookXml(){
-    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  function makeWorkbookXml(){return`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-  <sheets>
-    <sheet name="기초자료" sheetId="1" r:id="rId1"/>
-    <sheet name="문항 배점표" sheetId="2" r:id="rId2"/>
-  </sheets>
-</workbook>`;
-  }
-  function makeWorkbookRelsXml(){
-    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <sheets><sheet name="기초자료" sheetId="1" r:id="rId1"/><sheet name="문항 배점표" sheetId="2" r:id="rId2"/></sheets>
+</workbook>`;}
+  function makeWorkbookRelsXml(){return`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
   <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/>
-</Relationships>`;
-  }
-  function makeRootRelsXml(){
-    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+</Relationships>`;}
+  function makeRootRelsXml(){return`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
-</Relationships>`;
-  }
-  function makeContentTypesXml(){
-    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+</Relationships>`;}
+  function makeContentTypesXml(){return`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
   <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
   <Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
-</Types>`;
-  }
-  function strToU8(str){ return new TextEncoder().encode(str); }
-  function u16(n){ return [n & 255, (n>>>8)&255]; }
-  function u32(n){ return [n & 255, (n>>>8)&255, (n>>>16)&255, (n>>>24)&255]; }
+</Types>`;}
+  function strToU8(str){return new TextEncoder().encode(str);}
+  function u16(n){return[n&255,(n>>>8)&255];}
+  function u32(n){return[n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255];}
   function crc32(buf){
     let c;
-    const table = crc32.table || (crc32.table = (() => {
-      const t = [];
-      for (let n = 0; n < 256; n++) {
-        c = n;
-        for (let k = 0; k < 8; k++) c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
-        t[n] = c >>> 0;
-      }
-      return t;
-    })());
-    let crc = 0 ^ (-1);
-    for (let i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xFF];
-    return (crc ^ (-1)) >>> 0;
+    const table=crc32.table||(crc32.table=(()=>{const t=[];for(let n=0;n<256;n++){c=n;for(let k=0;k<8;k++)c=((c&1)?(0xEDB88320^(c>>>1)):(c>>>1));t[n]=c>>>0;}return t;})());
+    let crc=0^(-1);
+    for(let i=0;i<buf.length;i++) crc=(crc>>>8)^table[(crc^buf[i])&0xFF];
+    return(crc^(-1))>>>0;
   }
   function zipStore(files){
-    let localParts = [];
-    let centralParts = [];
-    let offset = 0;
-
-    files.forEach(file => {
-      const nameBytes = strToU8(file.name);
-      const data = file.data instanceof Uint8Array ? file.data : strToU8(file.data);
-      const crc = crc32(data);
-      const localHeader = new Uint8Array([
-        ...u32(0x04034b50), ...u16(20), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
-        ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nameBytes.length), ...u16(0), ...nameBytes
-      ]);
-      localParts.push(localHeader, data);
-
-      const centralHeader = new Uint8Array([
-        ...u32(0x02014b50), ...u16(20), ...u16(20), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
-        ...u32(crc), ...u32(data.length), ...u32(data.length),
-        ...u16(nameBytes.length), ...u16(0), ...u16(0), ...u16(0), ...u16(0),
-        ...u32(0), ...u32(offset), ...nameBytes
-      ]);
+    let localParts=[],centralParts=[],offset=0;
+    files.forEach(file=>{
+      const nameBytes=strToU8(file.name);
+      const data=file.data instanceof Uint8Array?file.data:strToU8(file.data);
+      const crc=crc32(data);
+      const localHeader=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(data.length),...u32(data.length),...u16(nameBytes.length),...u16(0),...nameBytes]);
+      localParts.push(localHeader,data);
+      const centralHeader=new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(data.length),...u32(data.length),...u16(nameBytes.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset),...nameBytes]);
       centralParts.push(centralHeader);
-      offset += localHeader.length + data.length;
+      offset+=localHeader.length+data.length;
     });
-
-    const centralSize = centralParts.reduce((n,p)=>n+p.length,0);
-    const centralOffset = offset;
-    const end = new Uint8Array([
-      ...u32(0x06054b50), ...u16(0), ...u16(0),
-      ...u16(files.length), ...u16(files.length),
-      ...u32(centralSize), ...u32(centralOffset), ...u16(0)
-    ]);
-
-    const totalLength = localParts.reduce((n,p)=>n+p.length,0) + centralSize + end.length;
-    const out = new Uint8Array(totalLength);
-    let ptr = 0;
-    [...localParts, ...centralParts, end].forEach(part => {
-      out.set(part, ptr);
-      ptr += part.length;
-    });
+    const centralSize=centralParts.reduce((n,p)=>n+p.length,0);
+    const centralOffset=offset;
+    const end=new Uint8Array([...u32(0x06054b50),...u16(0),...u16(0),...u16(files.length),...u16(files.length),...u32(centralSize),...u32(centralOffset),...u16(0)]);
+    const totalLength=localParts.reduce((n,p)=>n+p.length,0)+centralSize+end.length;
+    const out=new Uint8Array(totalLength); let ptr=0;
+    [...localParts,...centralParts,end].forEach(part=>{out.set(part,ptr);ptr+=part.length;});
     return out;
   }
+  function downloadBlob(filename,blob){
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
 
-  function buildWorkbookFiles(){
-    updateAutoFields();
-
-    const totalCnt = n("mcCount") + n("saCount");
-    const totalScore = n("mcScore") + n("saScore");
-
-    const inputCells = {
-      A1:{type:"s", value:"구분"}, B1:{type:"s", value:"선택형"}, C1:{type:"s", value:"서답형"}, D1:{type:"s", value:"비율"},
-      A2:{type:"s", value:"문항개수"}, B2:{type:"n", value:n("mcCount")}, C2:{type:"n", value:n("saCount")},
-      A3:{type:"s", value:"상"}, B3:{type:"n", value:n("mcHCnt")}, C3:{type:"n", value:n("saHCnt")}, D3:{type:"s", value:$("ratioCntH").textContent},
-      A4:{type:"s", value:"중"}, B4:{type:"n", value:n("mcMCnt")}, C4:{type:"n", value:n("saMCnt")}, D4:{type:"s", value:$("ratioCntM").textContent},
-      A5:{type:"s", value:"하"}, B5:{type:"n", value:n("mcLCnt")}, C5:{type:"n", value:n("saLCnt")}, D5:{type:"s", value:$("ratioCntL").textContent},
-      A6:{type:"s", value:"합계"}, B6:{type:"n", value:Number($("mcCntSum").textContent || 0)}, C6:{type:"n", value:Number($("saCntSum").textContent || 0)}, D6:{type:"s", value:"100%"},
-      A8:{type:"s", value:"문항점수"}, B8:{type:"n", value:n("mcScore")}, C8:{type:"n", value:n("saScore")},
-      A9:{type:"s", value:"상"}, B9:{type:"n", value:n("mcHScore")}, C9:{type:"n", value:n("saHScore")}, D9:{type:"s", value:$("ratioScoreH").textContent},
-      A10:{type:"s", value:"중"}, B10:{type:"n", value:n("mcMScore")}, C10:{type:"n", value:n("saMScore")}, D10:{type:"s", value:$("ratioScoreM").textContent},
-      A11:{type:"s", value:"하"}, B11:{type:"n", value:n("mcLScore")}, C11:{type:"n", value:n("saLScore")}, D11:{type:"s", value:$("ratioScoreL").textContent},
-      A12:{type:"s", value:"합계"}, B12:{type:"n", value:Number($("mcScoreSum").textContent || 0)}, C12:{type:"n", value:Number($("saScoreSum").textContent || 0)}, D12:{type:"s", value:"100%"}
+  function downloadXlsxWith(params, result){
+    const p=params||{};
+    const inputCells={
+      A1:{type:'s',value:'구분'},B1:{type:'s',value:'선택형'},C1:{type:'s',value:'서답형'},D1:{type:'s',value:'비율'},
+      A2:{type:'s',value:'문항개수'},B2:{type:'n',value:p.mcCount||0},C2:{type:'n',value:p.saCount||0},
+      A3:{type:'s',value:'상'},B3:{type:'n',value:p.mcH||0},C3:{type:'n',value:p.saH||0},
+      A4:{type:'s',value:'중'},B4:{type:'n',value:p.mcM||0},C4:{type:'n',value:p.saM||0},
+      A5:{type:'s',value:'하'},B5:{type:'n',value:p.mcL||0},C5:{type:'n',value:p.saL||0},
+      A8:{type:'s',value:'문항점수'},B8:{type:'n',value:p.mcScore||0},C8:{type:'n',value:p.saScore||0},
+      A9:{type:'s',value:'상'},B9:{type:'n',value:p.mcHScore||0},C9:{type:'n',value:p.saHScore||0},
+      A10:{type:'s',value:'중'},B10:{type:'n',value:p.mcMScore||0},C10:{type:'n',value:p.saMScore||0},
+      A11:{type:'s',value:'하'},B11:{type:'n',value:p.mcLScore||0},C11:{type:'n',value:p.saLScore||0},
     };
-
-    const outputCells = {
-      A1:{type:"s", value:"선택형 상"},
-      B1:{type:"s", value:"선택형 중"},
-      C1:{type:"s", value:"선택형 하"},
-      E1:{type:"s", value:"서답형 상"},
-      F1:{type:"s", value:"서답형 중"},
-      G1:{type:"s", value:"서답형 하"}
+    const outputCells={
+      A1:{type:'s',value:'선택형 상'},B1:{type:'s',value:'선택형 중'},C1:{type:'s',value:'선택형 하'},
+      E1:{type:'s',value:'서답형 상'},F1:{type:'s',value:'서답형 중'},G1:{type:'s',value:'서답형 하'}
     };
+    result.mcHigh.forEach((v,i)=>outputCells[`A${i+2}`]={type:'n',value:Number((v/10).toFixed(1))});
+    result.mcMid.forEach((v,i)=>outputCells[`B${i+2}`]={type:'n',value:Number((v/10).toFixed(1))});
+    result.mcLow.forEach((v,i)=>outputCells[`C${i+2}`]={type:'n',value:Number((v/10).toFixed(1))});
+    result.saHigh.forEach((v,i)=>outputCells[`E${i+2}`]={type:'n',value:v});
+    result.saMid.forEach((v,i)=>outputCells[`F${i+2}`]={type:'n',value:v});
+    result.saLow.forEach((v,i)=>outputCells[`G${i+2}`]={type:'n',value:v});
 
-    if (lastResult){
-      lastResult.mcHigh.forEach((v,i)=> outputCells[`A${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
-      lastResult.mcMid.forEach((v,i)=> outputCells[`B${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
-      lastResult.mcLow.forEach((v,i)=> outputCells[`C${i+2}`] = {type:"n", value:Number((v/10).toFixed(1))});
-      lastResult.saHigh.forEach((v,i)=> outputCells[`E${i+2}`] = {type:"n", value:v});
-      lastResult.saMid.forEach((v,i)=> outputCells[`F${i+2}`] = {type:"n", value:v});
-      lastResult.saLow.forEach((v,i)=> outputCells[`G${i+2}`] = {type:"n", value:v});
-    }
-
-    const sheet1 = sheetXmlFromCells(inputCells);
-    const sheet2 = sheetXmlFromCells(outputCells);
-
-    return [
-      { name:"[Content_Types].xml", data: makeContentTypesXml() },
-      { name:"_rels/.rels", data: makeRootRelsXml() },
-      { name:"xl/workbook.xml", data: makeWorkbookXml() },
-      { name:"xl/_rels/workbook.xml.rels", data: makeWorkbookRelsXml() },
-      { name:"xl/worksheets/sheet1.xml", data: sheet1 },
-      { name:"xl/worksheets/sheet2.xml", data: sheet2 }
+    const sheet1=sheetXmlFromCells(inputCells);
+    const sheet2=sheetXmlFromCells(outputCells);
+    const files=[
+      {name:'[Content_Types].xml',data:makeContentTypesXml()},
+      {name:'_rels/.rels',data:makeRootRelsXml()},
+      {name:'xl/workbook.xml',data:makeWorkbookXml()},
+      {name:'xl/_rels/workbook.xml.rels',data:makeWorkbookRelsXml()},
+      {name:'xl/worksheets/sheet1.xml',data:sheet1},
+      {name:'xl/worksheets/sheet2.xml',data:sheet2}
     ];
+    const bytes=zipStore(files);
+    const blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    downloadBlob('문항_배점_생성기.xlsx',blob);
   }
 
-  function downloadBlob(filename, blob){
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-
+  // 기본모드 XLSX (기존 방식 유지)
   function downloadXlsx(){
-    if (!lastResult){
-      showMessage("오류 및 해결방법\n\n먼저 배점을 생성해 주세요.", "error");
-      return;
-    }
-    const files = buildWorkbookFiles();
-    const bytes = zipStore(files);
-    const blob = new Blob([bytes], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-    downloadBlob("문항_배점_생성기.xlsx", blob);
+    if(!basicLastResult){ showMessage('오류 및 해결방법\n\n먼저 배점을 생성해 주세요.','error'); return; }
+    const p={
+      mcCount:n('mcCount'),saCount:n('saCount'),
+      mcH:n('mcHCnt'),mcM:n('mcMCnt'),mcL:n('mcLCnt'),
+      saH:n('saHCnt'),saM:n('saMCnt'),saL:n('saLCnt'),
+      mcScore:n('mcScore'),saScore:n('saScore'),
+      mcHScore:n('mcHScore'),mcMScore:n('mcMScore'),mcLScore:n('mcLScore'),
+      saHScore:n('saHScore'),saMScore:n('saMScore'),saLScore:n('saLScore'),
+    };
+    downloadXlsxWith(p,basicLastResult);
   }
 
-  numericIds.forEach(id => $(id).addEventListener("input", updateAutoFields));
-  $("generateBtn").addEventListener("click", generate);
-  $("resetBtn").addEventListener("click", resetDefaults);
-  $("downloadBtn").addEventListener("click", downloadXlsx);
+  /* ══════════════════════════════════════════
+     이벤트 바인딩
+  ══════════════════════════════════════════ */
+  numericIds.forEach(id=>{ const el=$(id); if(el) el.addEventListener('input',updateAutoFields); });
+  $('generateBtn').addEventListener('click',generate);
+  $('resetBtn').addEventListener('click',resetDefaults);
+  $('downloadBtn').addEventListener('click',downloadXlsx);
+
+  $('easyTotal').addEventListener('keydown',e=>{ if(e.key==='Enter') easyStep1Next(); });
+  $('easyTotalScore').addEventListener('keydown',e=>{ if(e.key==='Enter') $('easyMcScore').focus(); });
+  $('easyMcScore').addEventListener('keydown',e=>{ if(e.key==='Enter') $('easySaScore').focus(); });
+  $('easySaScore').addEventListener('keydown',e=>{ if(e.key==='Enter') easyStep2Next(); });
 
   updateAutoFields();
+  updateRatioTotal();
 })();
 </script>
 </body>
